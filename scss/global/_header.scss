@@ -1,0 +1,21 @@
+.header {
+    background: $primary-color;
+
+    .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    &__logo {
+
+    }
+
+    &__menu {
+        list-style: none;
+        color: white;
+        display: flex;
+        gap: 10px;
+    }
+
+}
