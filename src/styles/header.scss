@@ -1,5 +1,87 @@
 .header {
     background: #121922;
     width: 100%;
-    height: 105px;
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 105px;
+    }
+
+    &__logo {
+        text-align: start;
+        color: #FFFFFF;
+    }
+
+    &__menu {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 28px;
+
+        li {
+            position: relative;
+            a {
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+
+            .shoppingCart {
+                div {
+                    position: absolute;
+                    text-align: center;
+                    width: 18px;
+                    top: -15px;
+                    right: 15px;
+                    height: 18px;
+                    border-radius: 50%;
+                    background: #F08804;
+                }
+            }
+        }
+    }
+}
+
+.searchBar {
+    width: 100%;
+    background: #232F3E;
+
+    .container {
+        width: 100%;
+        height: 89px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__search {
+        display: flex;
+        justify-content: flex-end;
+
+        &__input {
+            max-width: 600px;
+            min-width: 300px;
+            width: 100%;
+            height: 55px;
+            border-radius: 10px 0 0 10px;
+            padding: 10px;
+            border-style: none;
+        }
+
+        &__button {
+            background: #D3D3D3;
+            width: 76px;
+            height: 55px;
+            border-style: none;
+            border-radius: 0 10px 10px 0;
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
+
+        }
+    }
 }
