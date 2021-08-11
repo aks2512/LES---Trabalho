@@ -147,6 +147,22 @@ export function Livros() {
                             </div>
                         </div>
                         
+                        <div className="card">
+                            <div className="card__image">
+                                <img src={livro} alt="" />
+                            </div>
+                            <div className="card__content">
+                                <a href="">
+                                    <p>Livro: Banco Brasil</p>
+                                    <span>Equipe Alfacon</span>
+                                    <h5>R$ 49,00</h5>
+                                </a>
+
+                                <a href="" className="button">Adicionar ao carrinho</a>
+                            
+                            </div>
+                        </div>
+                        
 
                     </div>
 
