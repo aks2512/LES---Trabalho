@@ -6,6 +6,7 @@
 
     &__menu {
         border: 1px solid $gray;
+        height: min-content;
         &__item {
             p {
                 width: 100%;
