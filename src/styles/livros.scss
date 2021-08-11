@@ -38,8 +38,8 @@
 
             
             .card {
-                width: 200px;
-                height: 225px;
+                min-width: 155px;
+                height: auto;
                 border: 1px solid $gray;
                 gap: 10px;
 
@@ -96,6 +96,7 @@
             justify-content: center;
             gap: 5px;
             list-style: none;
+            margin-top: 10px;
 
             a {
                 color: $gray;
