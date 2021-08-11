@@ -150,10 +150,6 @@ export function Livros() {
 
                     </div>
 
-                </div>
-
-            </div>
-
             <ul className="book__list__pagination">
                 <li><a href=""> Prev </a></li>
                 <li><a href=""> 1 </a></li>
@@ -163,6 +159,10 @@ export function Livros() {
                 <li><a href=""> 5 </a></li>
                 <li><a href=""> Next </a></li>
             </ul>
+                </div>
+
+            </div>
+
         
         </>
     )
