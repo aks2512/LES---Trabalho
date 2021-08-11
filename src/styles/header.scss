@@ -1,5 +1,5 @@
 .header {
-    background: #121922;
+    background: $blue1;
     width: 100%;
 
     .container {
@@ -11,7 +11,7 @@
 
     &__logo {
         text-align: start;
-        color: #FFFFFF;
+        color: $white;
     }
 
     &__menu {
@@ -24,7 +24,7 @@
         li {
             position: relative;
             a {
-                color: #FFFFFF;
+                color: $white;
                 text-decoration: none;
             }
 
@@ -37,7 +37,7 @@
                     right: 15px;
                     height: 18px;
                     border-radius: 50%;
-                    background: #F08804;
+                    background: $yellow;
                 }
             }
         }
@@ -46,7 +46,7 @@
 
 .searchBar {
     width: 100%;
-    background: #232F3E;
+    background: $blue2;
 
     .container {
         width: 100%;
@@ -71,7 +71,7 @@
         }
 
         &__button {
-            background: #D3D3D3;
+            background: $gray;
             width: 76px;
             height: 55px;
             border-style: none;

@@ -2,6 +2,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import { Home } from './pages/Home';
 
+import './styles/variables.scss';
+import './styles/fonts.scss';
+import './styles/grid.scss';
 import './styles/global.scss';
 
 function App() {

@@ -1,5 +1,5 @@
 .footer {
-    background: #232F3E;
+    background: $blue2;
 
     .container {
         height: 70px;
@@ -8,7 +8,7 @@
         justify-content: center;
 
         p {
-            color: #FFFFFF;
+            color: $white;
         }
     }
 }
