@@ -5,33 +5,8 @@ export function Livros() {
     return (
         <>
             <div className="d-flex book">
-                <div className="col-md-4 book__menu">
-                    <div className="book__menu__item">
-                        <p>
-                            Categorias
-                        </p>
-                        <ul>
-                            <li>Administracao</li>
-                        </ul>
-                    </div>
-                    <div className="book__menu__item">
-                        <p>
-                            Autores
-                        </p>
-                        <ul>
-                            <li>Autor</li>
-                        </ul>
-                    </div>
-                    <div className="book__menu__item">
-                        <p>
-                            Editoras
-                        </p>
-                        <ul>
-                            <li>Editora</li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="col-md-8 book__list">
+                
+                <div className="col-md-12 book__list">
                     <h5 className="book__list__title">Livros</h5>
                     <div className="book__list__cards">
 
@@ -146,7 +121,7 @@ export function Livros() {
                             
                             </div>
                         </div>
-                        
+
                         <div className="card">
                             <div className="card__image">
                                 <img src={livro} alt="" />
