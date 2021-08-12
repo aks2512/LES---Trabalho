@@ -5,20 +5,6 @@ import { Header } from '../components/Header';
 import { Form } from '../components/Form';
 
 export function CadastroCliente() {
-    const { radios, setRadios } = useState(['true', 'false', 'false']);
-
-    function changeRadio() {
-        let radio1 = document.querySelector('#sexo1');
-        let radio2 = document.querySelector('#sexo2');
-        let radio3 = document.querySelector('#sexo3');
-
-        document.addEventListener('click', () => {
-            if(radio1 === this) setRadios(['true', 'false', 'false']);
-            if(radio2 === this) setRadios(['false', 'true', 'false']);
-            if(radio3 === this) setRadios(['false', 'false', 'true']);
-        });
-
-    }
 
     return (
         <>
@@ -36,15 +22,15 @@ export function CadastroCliente() {
                         <input type="text" placeholder="CPF" />
                         <div className="radios">
                             <div className="radio">
-                                <input id="sexo1" name="sexo" type="radio" value="masculino"  onClick={changeRadio}/>
+                                <input id="sexo1" name="sexo" type="radio" value="masculino" checked/>
                                 <label htmlFor="sexo1">Masculino</label>
                             </div>
                             <div className="radio">
-                                <input id="sexo2" name="sexo" type="radio" value="feminino"  onClick={changeRadio}/>
+                                <input id="sexo2" name="sexo" type="radio" value="feminino" checked/>
                                 <label htmlFor="sexo2">Feminino</label>
                             </div>
                             <div className="radio">
-                                <input id="sexo3" name="sexo" type="radio" value="outro"  onClick={changeRadio}/>
+                                <input id="sexo3" name="sexo" type="radio" value="outro" checked/>
                                 <label htmlFor="sexo3">Outro</label>
                             </div>
                         </div>
