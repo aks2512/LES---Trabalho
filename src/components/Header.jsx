@@ -1,25 +1,27 @@
+import { Link } from 'react-router-dom';
+
 import '../styles/header.scss';
 
 import searchIcon from '../assets/images/search-icon.png';
-
 import shoppingCart from '../assets/images/shopping-cart.png';
 
 export function Header() {
+
     return (
         <>
             <header className="header">
                 <div className="container">
-                    <h1 className="header__logo col-md-6">Logo</h1>
+                    <Link className="header__logo col-md-6" to="/"><h1>Logo</h1></Link>
                     <ul className="header__menu col-md-6">
-                        <li><a href="">Entrar</a></li>
-                        <li><a href="">Cadastre-se</a></li>
+                        <li><Link to="/detalhesDaConta">Entrar</Link></li>
+                        <li><Link to="/cadastroCliente">Cadastre-se</Link></li>
                         <li>
-                            <a href="">
+                            <Link>
                                 <div className="shoppingCart">
                                     <div>2</div>
                                     <img src={shoppingCart} alt="" />
                                 </div>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -33,5 +35,5 @@ export function Header() {
                 </div>
             </div>
         </>
-    )
+    );
 }

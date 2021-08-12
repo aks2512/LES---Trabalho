@@ -7,5 +7,5 @@ export function Footer(){
                 <p>Logo Serviços de Varejo do Brasil Ltda. | CNPJ 15.800.000/0001-03</p>
             </div>
         </footer>
-    )
+    );
 }

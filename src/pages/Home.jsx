@@ -1,8 +1,8 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { Livros } from '../components/Livros';
 
 import homeBanner from '../assets/images/banner.png';
-import { Livros } from '../components/Livros';
 
 export function Home() {
     return (
