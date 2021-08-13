@@ -2,6 +2,10 @@
 
 .footer {
     background: $blue2;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
     .container {
         height: 70px;

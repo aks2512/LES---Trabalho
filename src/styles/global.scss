@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+body, html {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
 p, span, td, a {
     font-family: 'Roboto Regular', sans-serif;
 }
@@ -13,7 +19,7 @@ h1, h2, h3, h4, h5, h6, th, strong {
 }
 
 main {
-    margin: 10px 0px 125px 0px;
+    margin: 167px auto;
 }
 
 img {
