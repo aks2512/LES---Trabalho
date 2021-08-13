@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { Form } from "../components/Form";
 import { Cards } from "../components/Cards";
+import { Card } from "../components/Card";
 
 export function DetalhesDaConta() {
     return(
@@ -55,27 +56,53 @@ export function DetalhesDaConta() {
                                 title="Endereços"
                                 new="Novo Endereço"
                                 newLink="/cadastroEndereco"
-                                editar="/editarEndereco"
                             >
-                                <h5>Endereço 1</h5>
-                                <p><strong>Logradouro:</strong> xxxxxxxxxxxxx</p>
-                                <p><strong>Numero:</strong> xxxx</p>
-                                <p><strong>CEP:</strong> xxxx-xxxx</p>
-                                <p><strong>Cidade:</strong> xxxxxxxx</p>
-                                <p><strong>Bairro:</strong> xxxxxxxx</p>
-                                <p><strong>Estado:</strong> xxxxxxxx</p>
+                                <Card
+                                    editar="/editarEndereco"
+                                >
+                                    <h5>Endereço 1</h5>
+                                    <p><strong>Logradouro:</strong> xxxxxxxxxxxxx</p>
+                                    <p><strong>Numero:</strong> xxxx</p>
+                                    <p><strong>CEP:</strong> xxxx-xxxx</p>
+                                    <p><strong>Cidade:</strong> xxxxxxxx</p>
+                                    <p><strong>Bairro:</strong> xxxxxxxx</p>
+                                    <p><strong>Estado:</strong> xxxxxxxx</p>
+                                </Card>
+                                <Card
+                                    editar="/editarEndereco"
+                                >
+                                    <h5>Endereço 1</h5>
+                                    <p><strong>Logradouro:</strong> xxxxxxxxxxxxx</p>
+                                    <p><strong>Numero:</strong> xxxx</p>
+                                    <p><strong>CEP:</strong> xxxx-xxxx</p>
+                                    <p><strong>Cidade:</strong> xxxxxxxx</p>
+                                    <p><strong>Bairro:</strong> xxxxxxxx</p>
+                                    <p><strong>Estado:</strong> xxxxxxxx</p>
+                                </Card>
                             </Cards>
                             <Cards
                                 title="Cartões"
                                 new="Novo Cartão"
                                 newLink="/cadastroCartao"
-                                editar="/editarCartao"
                             >
-                                <h5>Cartão 1</h5>
-                                <p><strong>Numero:</strong> xxxxxxxxxxxxx</p>
-                                <p><strong>Nome:</strong> xxxx</p>
-                                <p><strong>Expiração:</strong> xxxx-xxxx</p>
-                                <p><strong>Codigo:</strong> xxxxxxxx</p>
+                                <Card
+                                    editar="/editarCartao"
+                                >
+                                    <h5>Cartão 1</h5>
+                                    <p><strong>Numero:</strong> xxxxxxxxxxxxx</p>
+                                    <p><strong>Nome:</strong> xxxx</p>
+                                    <p><strong>Expiração:</strong> xxxx-xxxx</p>
+                                    <p><strong>Codigo:</strong> xxxxxxxx</p>
+                                </Card>
+                                <Card
+                                    editar="/editarCartao"
+                                >
+                                    <h5>Cartão 1</h5>
+                                    <p><strong>Numero:</strong> xxxxxxxxxxxxx</p>
+                                    <p><strong>Nome:</strong> xxxx</p>
+                                    <p><strong>Expiração:</strong> xxxx-xxxx</p>
+                                    <p><strong>Codigo:</strong> xxxxxxxx</p>
+                                </Card>
                             </Cards>
                         </div>
 
