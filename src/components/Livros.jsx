@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import '../styles/livros.scss';
 import livro from '../assets/images/livro.png';
 
@@ -15,13 +17,13 @@ export function Livros() {
                                 <img src={livro} alt="" />
                             </div>
                             <div className="card__content">
-                                <a href="">
+                                <Link to="/#">
                                     <p>Livro: Banco Brasil</p>
                                     <span>Equipe Alfacon</span>
                                     <h5>R$ 49,00</h5>
-                                </a>
+                                </Link>
 
-                                <a href="" className="button">Adicionar ao carrinho</a>
+                                <Link to="/#" className="button">Adicionar ao carrinho</Link>
                             
                             </div>
                         </div>
@@ -31,13 +33,13 @@ export function Livros() {
                                 <img src={livro} alt="" />
                             </div>
                             <div className="card__content">
-                                <a href="">
+                                <Link to="/#">
                                     <p>Livro: Banco Brasil</p>
                                     <span>Equipe Alfacon</span>
                                     <h5>R$ 49,00</h5>
-                                </a>
+                                </Link>
 
-                                <a href="" className="button">Adicionar ao carrinho</a>
+                                <Link to="/#" className="button">Adicionar ao carrinho</Link>
                             
                             </div>
                         </div>
@@ -47,13 +49,13 @@ export function Livros() {
                                 <img src={livro} alt="" />
                             </div>
                             <div className="card__content">
-                                <a href="">
+                                <Link to="/#">
                                     <p>Livro: Banco Brasil</p>
                                     <span>Equipe Alfacon</span>
                                     <h5>R$ 49,00</h5>
-                                </a>
+                                </Link>
 
-                                <a href="" className="button">Adicionar ao carrinho</a>
+                                <Link to="/#" className="button">Adicionar ao carrinho</Link>
                             
                             </div>
                         </div>
@@ -63,13 +65,13 @@ export function Livros() {
                                 <img src={livro} alt="" />
                             </div>
                             <div className="card__content">
-                                <a href="">
+                                <Link to="/#">
                                     <p>Livro: Banco Brasil</p>
                                     <span>Equipe Alfacon</span>
                                     <h5>R$ 49,00</h5>
-                                </a>
+                                </Link>
 
-                                <a href="" className="button">Adicionar ao carrinho</a>
+                                <Link to="/#" className="button">Adicionar ao carrinho</Link>
                             
                             </div>
                         </div>
@@ -79,13 +81,13 @@ export function Livros() {
                                 <img src={livro} alt="" />
                             </div>
                             <div className="card__content">
-                                <a href="">
+                                <Link to="/#">
                                     <p>Livro: Banco Brasil</p>
                                     <span>Equipe Alfacon</span>
                                     <h5>R$ 49,00</h5>
-                                </a>
+                                </Link>
 
-                                <a href="" className="button">Adicionar ao carrinho</a>
+                                <Link to="/#" className="button">Adicionar ao carrinho</Link>
                             
                             </div>
                         </div>
@@ -95,13 +97,13 @@ export function Livros() {
                                 <img src={livro} alt="" />
                             </div>
                             <div className="card__content">
-                                <a href="">
+                                <Link to="/#">
                                     <p>Livro: Banco Brasil</p>
                                     <span>Equipe Alfacon</span>
                                     <h5>R$ 49,00</h5>
-                                </a>
+                                </Link>
 
-                                <a href="" className="button">Adicionar ao carrinho</a>
+                                <Link to="/#" className="button">Adicionar ao carrinho</Link>
                             
                             </div>
                         </div>
@@ -111,13 +113,13 @@ export function Livros() {
                                 <img src={livro} alt="" />
                             </div>
                             <div className="card__content">
-                                <a href="">
+                                <Link to="/#">
                                     <p>Livro: Banco Brasil</p>
                                     <span>Equipe Alfacon</span>
                                     <h5>R$ 49,00</h5>
-                                </a>
+                                </Link>
 
-                                <a href="" className="button">Adicionar ao carrinho</a>
+                                <Link to="/#" className="button">Adicionar ao carrinho</Link>
                             
                             </div>
                         </div>
@@ -127,13 +129,13 @@ export function Livros() {
                                 <img src={livro} alt="" />
                             </div>
                             <div className="card__content">
-                                <a href="">
+                                <Link to="/#">
                                     <p>Livro: Banco Brasil</p>
                                     <span>Equipe Alfacon</span>
                                     <h5>R$ 49,00</h5>
-                                </a>
+                                </Link>
 
-                                <a href="" className="button">Adicionar ao carrinho</a>
+                                <Link to="/#" className="button">Adicionar ao carrinho</Link>
                             
                             </div>
                         </div>

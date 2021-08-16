@@ -7,8 +7,8 @@ export function Card(props) {
         <div className="card">
             {props.children}
             <div className="card__links">
-                <Link to={props.editar}>Editar</Link>
-                <Link to={props.excluir}>Excluir</Link>
+                <Link to={props => props.editar}>Editar</Link>
+                <Link to={props => props.excluir}>Excluir</Link>
             </div>
         </div>
     );

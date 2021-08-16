@@ -86,21 +86,6 @@
             }
         }
 
-        button {
-            background: $yellow;
-            color: $white;
-            border: 1px solid $yellow;
-            padding: 10px;
-            font-size: 2rem;
-            font-weight: 700;
-            border-radius: 10px;
-            max-width: 100%;
-            min-width: 30%;
-            margin: auto;
-            position: relative;
-            bottom: -35px;
-        }
-
         .link1, .link2 {
             display: flex;
             justify-content: flex-end;

@@ -18,7 +18,8 @@ export function DetalhesDaConta() {
 
                             <Form
                                 title="Detalhes da Conta"
-                                buttonText="Atualizar"   
+                                buttonText="Atualizar" 
+                                popupMessage="Atualizado com sucesso"    
                             >
                                 <div className="link1">
                                     <Link to="/editarSenha">Alterar Senha</Link>
