@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useState, FormEvent, ReactNode } from 'react';
 
 import { Popup } from './Popup';
 
 import '../styles/form.scss';
 
-export function Form(props) {
+type formProps = {
+    title:string,
+    about:string,
+    buttonText:string,
+    popupMessage:string,
+    children?: ReactNode
+}
+
+export function Form(props:formProps) {
     const [showPopup, setShowPopup] = useState(false);
 
-    const openPopup = (e) => {
+    const openPopup = (e:FormEvent) => {
         e.preventDefault();
         
         setShowPopup(true);
