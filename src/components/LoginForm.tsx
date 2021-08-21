@@ -13,15 +13,15 @@ export function LoginForm(props:loginFormProps) {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-    // function closeLoginForm() {
-    //     props.setShowLoginForm(false);
-    // }
+    function formSubmit() {
+        handleLogin(email, senha);
+    }
 
     return (
         <div className="login__form" >
             <div className="boxMessage">
                <h1>Entre com a sua conta</h1>
-               <form onSubmit={handleLogin}>
+               <form onSubmit={formSubmit}>
                     <input
                         type="email"
                         placeholder="Email"
