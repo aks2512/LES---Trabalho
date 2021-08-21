@@ -1,37 +1,37 @@
 import { useState, FormEvent, ReactNode } from 'react';
 
-import { Popup } from './Popup';
+import { Modal } from './Modal';
 
 import '../styles/form.scss';
 
 type formProps = {
     title:string,
-    about:string,
+    about?:string,
     buttonText:string,
-    popupMessage:string,
+    modalMessage:string,
     children?: ReactNode
 }
 
 export function Form(props:formProps) {
-    const [showPopup, setShowPopup] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
-    const openPopup = (e:FormEvent) => {
+    const openModal = (e:FormEvent) => {
         e.preventDefault();
         
-        setShowPopup(true);
+        setShowModal(true);
     };
 
     return (
         <>
             <div className="form">
                 <h1 className="form__title" >{props.title}</h1>
-                <form onSubmit={openPopup} className="form__body">
-                    <p>{props.about}</p>
+                <form onSubmit={openModal} className="form__body">
+                    {props.about ? <p>{props.about}</p> : null}
                     {props.children}
                     <button type="submit" className="button">{props.buttonText}</button>
                 </form>
             </div>
-            {showPopup ? <Popup message={props.popupMessage} setShowPopup={setShowPopup} /> : null}
+            {showModal ? <Modal message={props.modalMessage} setShowModal={setShowModal} /> : null}
         </>
     );
 }

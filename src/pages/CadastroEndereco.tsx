@@ -12,7 +12,7 @@ export function CadastroEndereco() {
                         title="Cadastrar endereço" 
                         about="Endereço"
                         buttonText="Cadastrar"    
-                        popupMessage="Cadastrado com sucesso"  
+                        modalMessage="Cadastrado com sucesso"  
                     >
                         <input type="text" placeholder="Logradouro" />
                         <input type="text" placeholder="Numero" />

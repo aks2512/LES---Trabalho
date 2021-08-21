@@ -2,17 +2,17 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Form } from '../components/Form';
 
-export function CadastroCartao() {
+export function EditarCartao() {
     return (
         <>
             <Header />
             <main>
                 <div className="container">
                     <Form 
-                        title="Cadastrar Cartão"
+                        title="Editar Cartão"
                         about="Cartão"
-                        buttonText="Cadastrar"
-                        popupMessage="Cadastrado com sucesso" 
+                        buttonText="Atualizar"
+                        modalMessage="Atualizado com sucesso" 
                     >
                         <input type="text" placeholder="Numero do Cartão" />
                         <input type="text" placeholder="Nome do Cartão" />

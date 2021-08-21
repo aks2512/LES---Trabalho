@@ -12,7 +12,7 @@ export function EditarEndereco() {
                         title="Editar endereço" 
                         about="Endereço"
                         buttonText="Atualizar"    
-                        popupMessage="Atualizado com sucesso" 
+                        modalMessage="Atualizado com sucesso" 
                     >
                         <input type="text" placeholder="Logradouro" />
                         <input type="text" placeholder="Numero" />

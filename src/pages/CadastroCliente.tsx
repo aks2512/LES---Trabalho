@@ -13,7 +13,7 @@ export function CadastroCliente() {
                         title="Cadastre-se" 
                         about="Usuário"
                         buttonText="Criar conta"
-                        popupMessage="Cadastrado com sucesso"    
+                        modalMessage="Cadastrado com sucesso"    
                     >
                         <input type="text" placeholder="Primeiro Nome" />
                         <input type="text" placeholder="Ultimo Nome" />

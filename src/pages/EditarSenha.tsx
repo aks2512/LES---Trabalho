@@ -12,7 +12,7 @@ export function EditarSenha() {
                         title="Editar Senha"
                         about="Redefinição de Senha"
                         buttonText="Atualizar"
-                        popupMessage="Atualizado com sucesso" 
+                        modalMessage="Atualizado com sucesso" 
                     >
                         <input type="password" placeholder="Nova Senha" />
                         <input type="password" placeholder="Confirme a Senha" />

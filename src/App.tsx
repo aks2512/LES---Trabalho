@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import { Home } from './pages/Home';
@@ -9,7 +10,7 @@ import { EditarCartao } from './pages/EditarCartao';
 import { EditarSenha } from './pages/EditarSenha';
 import { DetalhesDaConta } from './pages/DetalhesDaConta';
 
-import { Context } from './Context/AuthContext';
+import { Context } from './contexts/AuthContext';
 
 
 import './styles/fonts.scss';
@@ -19,7 +20,7 @@ import './styles/global.scss';
 
 function App() {
 
-  function UserRoute({ isPrivate, ...rest }) {
+  function UserRoute({ isPrivate = false, ...rest }) {
     const { loading, authenticated } = useContext(Context);
   
     if (loading) {
@@ -35,7 +36,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AuthContextProvider>
         <Switch>
           <UserRoute path="/" exact component={Home} />
           <UserRoute path="/cadastroCliente" exact component={CadastroCliente} />
@@ -46,7 +46,6 @@ function App() {
           <UserRoute isPrivate  path="/editarSenha" exact component={EditarSenha} />
           <UserRoute isPrivate  path="/detalhesDaConta" exact component={DetalhesDaConta} />
         </Switch>
-      </AuthContextProvider>
     </BrowserRouter>
   );
 }

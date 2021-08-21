@@ -1,21 +1,21 @@
-import { useState, useContext, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 
 import '../styles/loginForm.scss';
 
-import { Context } from '../contexts/AuthContext';
+import useAuth from '../hooks/useAuth';
 
 type loginFormProps = {
     setShowLoginForm:Function,
 }
 
 export function LoginForm(props:loginFormProps) {
-    const { user, authenticated, handleLogin, handleLogout} = useContext(Context);
+    const {handleLogin} = useAuth();
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-    function closeLoginForm() {
-        props.setShowLoginForm(false);
-    }
+    // function closeLoginForm() {
+    //     props.setShowLoginForm(false);
+    // }
 
     function logIn(e:FormEvent){
         e.preventDefault();
@@ -24,7 +24,7 @@ export function LoginForm(props:loginFormProps) {
     }
 
     return (
-        <div className="login__form" onClick={closeLoginForm}>
+        <div className="login__form" >
             <div className="boxMessage">
                <h1>Entre com a sua conta</h1>
                <form onSubmit={logIn}>

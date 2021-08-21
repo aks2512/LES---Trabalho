@@ -19,7 +19,7 @@ export function DetalhesDaConta() {
                             <Form
                                 title="Detalhes da Conta"
                                 buttonText="Atualizar" 
-                                popupMessage="Atualizado com sucesso"    
+                                modalMessage="Atualizado com sucesso"    
                             >
                                 <div className="link1">
                                     <Link to="/editarSenha">Alterar Senha</Link>
@@ -46,7 +46,7 @@ export function DetalhesDaConta() {
                                 <input type="email" placeholder="Email" />
                                 <input type="tel" placeholder="Telefone" />
 
-                                <div class="link2">
+                                <div className="link2">
                                     <Link to="/editarSenha">desativar conta</Link>
                                 </div>
 

@@ -5,7 +5,7 @@ import '../styles/card.scss';
 
 type cardProps = {
     editar: string,
-    excluir: string,
+    excluir?: string,
     children?: ReactNode;
 }
 
@@ -15,7 +15,7 @@ export function Card(props:cardProps) {
             {props.children}
             <div className="card__links">
                 <Link to={props.editar}>Editar</Link>
-                <Link to={props.excluir}>Excluir</Link>
+                {props.excluir ? <Link to={props.excluir}>Excluir</Link> : null}
             </div>
         </div>
     );
