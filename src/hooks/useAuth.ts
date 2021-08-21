@@ -16,7 +16,6 @@ export default function useAuth() {
     //api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
       setAuthenticated(true);
     }
-    console.log()
     setLoading(false);
   }, []);
   

@@ -1,52 +1,18 @@
-import { useContext } from 'react';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import React from 'react';
+import { Router } from 'react-router-dom';
 
-import { Home } from './pages/Home';
-import { CadastroCliente } from './pages/CadastroCliente';
-import { CadastroEndereco } from './pages/CadastroEndereco';
-import { CadastroCartao } from './pages/CadastroCartao';
-import { EditarEndereco } from './pages/EditarEndereco';
-import { EditarCartao } from './pages/EditarCartao';
-import { EditarSenha } from './pages/EditarSenha';
-import { DetalhesDaConta } from './pages/DetalhesDaConta';
+import {Routes} from './routes';
+import { createBrowserHistory } from 'history';
 
-import { Context } from './contexts/AuthContext';
-
-
-import './styles/fonts.scss';
-import './styles/animation.scss';
-import './styles/bootstrap.scss';
-import './styles/global.scss';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
-
-  function UserRoute({ isPrivate = false, ...rest }) {
-    const { loading, authenticated } = useContext(Context);
-  
-    if (loading) {
-      return <h1>Loading...</h1>;
-    }
-  
-    if (isPrivate && !authenticated) {
-      return <Redirect to="/" />
-    }
-  
-    return <Route {...rest} />;
-  }
-
   return (
-    <BrowserRouter>
-        <Switch>
-          <UserRoute path="/" exact component={Home} />
-          <UserRoute path="/cadastroCliente" exact component={CadastroCliente} />
-          <UserRoute isPrivate  path="/cadastroCartao" exact component={CadastroCartao} />
-          <UserRoute isPrivate  path="/cadastroEndereco" exact component={CadastroEndereco} />
-          <UserRoute isPrivate  path="/editarEndereco" exact component={EditarEndereco} />
-          <UserRoute isPrivate  path="/editarCartao" exact component={EditarCartao} />
-          <UserRoute isPrivate  path="/editarSenha" exact component={EditarSenha} />
-          <UserRoute isPrivate  path="/detalhesDaConta" exact component={DetalhesDaConta} />
-        </Switch>
-    </BrowserRouter>
+    <AuthProvider>
+      <Router history={createBrowserHistory()}>
+        <Routes />
+      </Router>
+    </AuthProvider>
   );
 }
 

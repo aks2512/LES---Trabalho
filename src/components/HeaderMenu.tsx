@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../styles/headerMenu.scss';
@@ -12,12 +11,7 @@ type headerMenuProps = {
 }
 
 export function HeaderMenu(props:headerMenuProps) {
-
     const { user, authenticated, handleLogout} = useAuth();
-
-    useEffect(() => {
-        console.log(authenticated)
-    })
 
     return (
         <ul className="header__menu col-md-6">
@@ -31,7 +25,7 @@ export function HeaderMenu(props:headerMenuProps) {
                 <>
                     <li><Link to="/detalhesDaConta">Olá {user}</Link></li>
                     <li><Link to="/#">Ver pedidos</Link></li>
-                    <li><button type="button" onClick={() => handleLogout()}>Log out</button></li>
+                    <li><button type="button" onClick={handleLogout}>Log out</button></li>
                 </>
             )}
             <li>

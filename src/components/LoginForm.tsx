@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 
 import '../styles/loginForm.scss';
 
@@ -17,17 +17,11 @@ export function LoginForm(props:loginFormProps) {
     //     props.setShowLoginForm(false);
     // }
 
-    function logIn(e:FormEvent){
-        e.preventDefault();
-        props.setShowLoginForm(false);
-        handleLogin();
-    }
-
     return (
         <div className="login__form" >
             <div className="boxMessage">
                <h1>Entre com a sua conta</h1>
-               <form onSubmit={logIn}>
+               <form onSubmit={handleLogin}>
                     <input
                         type="email"
                         placeholder="Email"
