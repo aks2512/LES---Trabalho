@@ -11,7 +11,7 @@ type headerMenuProps = {
 }
 
 export function HeaderMenu(props:headerMenuProps) {
-    const { user, authenticated, handleLogout} = useAuth();
+    const { user, authenticated, handleLogout, testeData, testeAuth} = useAuth();
 
     return (
         <ul className="header__menu col-md-6">
@@ -28,6 +28,7 @@ export function HeaderMenu(props:headerMenuProps) {
                     <li><button type="button" onClick={handleLogout}>Log out</button></li>
                 </>
             )}
+            <li><button type="button" onClick={testeAuth}>testeData</button></li>
             <li>
                 <ShoppingCart/>
             </li>

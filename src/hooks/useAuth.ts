@@ -34,12 +34,25 @@ export default function useAuth() {
 
   function handleLogout() {
     setAuthenticated(false);
-    localStorage.getItem('user_first_name');
-    localStorage.getItem('user_email');
-    localStorage.getItem('user_senha');
+    localStorage.removeItem('user_first_name');
+    localStorage.removeItem('user_email');
+    localStorage.removeItem('user_senha');
     // api.defaults.headers.Authorization = undefined;
     createBrowserHistory().push('/');
   }
+
+  async function testeAuth() {
+    const { data: { token } } = await api.get('/clientes/1');
+
+    localStorage.setItem('token', JSON.stringify(token));
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+    setAuthenticated(true);
+  }
+
+  async function testeData() {
+    const userDB = await api.get('/clientes');
+    console.log(userDB['data'])
+  }
   
-  return { user, authenticated, loading, handleLogin, handleLogout };
+  return { user, authenticated, loading, handleLogin, handleLogout, testeData, testeAuth };
 }
