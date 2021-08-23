@@ -7,6 +7,7 @@ import '../styles/form.scss';
 type formProps = {
     title:string,
     about?:string,
+    submitFunction:Function,
     buttonText:string,
     modalMessage:string,
     children?: ReactNode
@@ -15,9 +16,9 @@ type formProps = {
 export function Form(props:formProps) {
     const [showModal, setShowModal] = useState(false);
 
-    const openModal = (e:FormEvent) => {
+    const validateRequisition = (e:FormEvent) => {
         e.preventDefault();
-        
+        props.submitFunction(e);
         setShowModal(true);
     };
 
@@ -25,7 +26,7 @@ export function Form(props:formProps) {
         <>
             <div className="form">
                 <h1 className="form__title" >{props.title}</h1>
-                <form onSubmit={openModal} className="form__body">
+                <form onSubmit={validateRequisition} className="form__body">
                     {props.about ? <p>{props.about}</p> : null}
                     {props.children}
                     <button type="submit" className="button">{props.buttonText}</button>

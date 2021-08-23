@@ -1,11 +1,56 @@
-import { Link } from "react-router-dom";
+import { useLayoutEffect, useState, FormEvent } from "react";
+import { Link, useHistory } from "react-router-dom";
+
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { Form } from "../components/Form";
 import { Cards } from "../components/Cards";
 import { Card } from "../components/Card";
 
+import useAuth from '../hooks/useAuth';
+
+import api from "../api";
+
 export function DetalhesDaConta() {
+    const history = useHistory();
+    const { setUser } = useAuth();
+    const [pnome, setPnome] = useState('');
+    const [unome, setUnome] = useState('');
+    const [rg, setRg] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [email, setEmail] = useState('');
+    const [telefone, setTelefone] = useState('');
+
+    useLayoutEffect(() => {
+        async function getData() {
+            const userDB = await api.post('clientes/readId');
+            const userData = userDB.data;
+            setPnome(userData.cli_pnome);
+            setUnome(userData.cli_unome);
+            setRg(userData.cli_rg);
+            setCpf(userData.cli_cpf);
+            setEmail(userData.cli_email);
+            setTelefone(userData.cli_telefone);
+        }
+        getData();
+    }, [])
+
+    async function updateClientForm(e:FormEvent) {
+        e.preventDefault();
+        await api.put('clientes/update', {
+            "cli_pnome": pnome,
+            "cli_unome": unome,
+            "cli_rg": rg,
+            "cli_cpf": cpf,
+            "cli_email": email,
+            "cli_telefone": telefone,
+            "cli_senha": "teste",
+        });
+        history.push('/');
+        setUser(pnome);
+        localStorage.setItem('username', pnome)
+    }
+
     return(
         <div>
             <Header/>
@@ -17,6 +62,7 @@ export function DetalhesDaConta() {
                         <div className="col-12 col-lg-6">
 
                             <Form
+                                submitFunction={updateClientForm}
                                 title="Detalhes da Conta"
                                 buttonText="Atualizar" 
                                 modalMessage="Atualizado com sucesso"    
@@ -25,9 +71,9 @@ export function DetalhesDaConta() {
                                     <Link to="/editarSenha">Alterar Senha</Link>
                                 </div>
 
-                                <input type="text" placeholder="Primeiro Nome" />
-                                <input type="text" placeholder="Ultimo Nome" />
-                                <div className="radios">
+                                <input onChange={e => setPnome(e.target.value)} value={pnome} type="text" placeholder="Primeiro Nome" />
+                                <input onChange={e => setUnome(e.target.value)} value={unome} type="text" placeholder="Ultimo Nome" />
+                                {/* <div className="radios">
                                     <div className="radio">
                                         <input id="sexo1" name="sexo" type="radio" value="masculino" checked/>
                                         <label htmlFor="sexo1">Masculino</label>
@@ -40,11 +86,11 @@ export function DetalhesDaConta() {
                                         <input id="sexo3" name="sexo" type="radio" value="outro" checked/>
                                         <label htmlFor="sexo3">Outro</label>
                                     </div>
-                                </div>
-                                <input type="text" placeholder="RG" />
-                                <input type="text" placeholder="CPF" />
-                                <input type="email" placeholder="Email" />
-                                <input type="tel" placeholder="Telefone" />
+                                </div> */}
+                                <input onChange={e => setRg(e.target.value)} value={rg} type="text" placeholder="RG"/>
+                                <input onChange={e => setCpf(e.target.value)} value={cpf} type="text" placeholder="CPF" />
+                                <input onChange={e => setEmail(e.target.value)} value={email} type="email" placeholder="Email" />
+                                <input onChange={e => setTelefone(e.target.value)} value={telefone} type="tel" placeholder="Telefone" />
 
                                 <div className="link2">
                                     <Link to="/editarSenha">desativar conta</Link>

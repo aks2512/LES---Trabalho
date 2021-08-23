@@ -9,6 +9,7 @@ export function EditarEndereco() {
             <main>
                 <div className="container">
                     <Form 
+                        submitFunction={() => console.log('teste')}
                         title="Editar endereço" 
                         about="Endereço"
                         buttonText="Atualizar"    

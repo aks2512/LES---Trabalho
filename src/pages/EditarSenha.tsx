@@ -9,6 +9,7 @@ export function EditarSenha() {
             <main>
                 <div className="container">
                     <Form 
+                        submitFunction={() => console.log('teste')}
                         title="Editar Senha"
                         about="Redefinição de Senha"
                         buttonText="Atualizar"

@@ -9,6 +9,7 @@ export function CadastroCartao() {
             <main>
                 <div className="container">
                     <Form 
+                        submitFunction={() => console.log('teste')}
                         title="Cadastrar Cartão"
                         about="Cartão"
                         buttonText="Cadastrar"

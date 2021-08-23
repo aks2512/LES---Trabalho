@@ -9,6 +9,7 @@ export function CadastroEndereco() {
             <main>
                 <div className="container">
                     <Form 
+                        submitFunction={() => console.log('teste')}
                         title="Cadastrar endereço" 
                         about="Endereço"
                         buttonText="Cadastrar"    

@@ -9,6 +9,7 @@ export function EditarCartao() {
             <main>
                 <div className="container">
                     <Form 
+                        submitFunction={() => console.log('teste')}
                         title="Editar Cartão"
                         about="Cartão"
                         buttonText="Atualizar"

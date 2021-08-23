@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 import '../styles/loginForm.scss';
 
@@ -11,10 +11,12 @@ type loginFormProps = {
 export function LoginForm(props:loginFormProps) {
     const {handleLogin} = useAuth();
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [password, setPassword] = useState('');
 
-    function formSubmit() {
-        handleLogin(email, senha);
+    async function formSubmit(e:FormEvent) {
+        e.preventDefault();
+        await handleLogin(email, password);
+        props.setShowLoginForm(false);
     }
 
     return (
@@ -31,8 +33,8 @@ export function LoginForm(props:loginFormProps) {
                     <input
                         type="password"
                         placeholder="Senha"
-                        onChange={event => setSenha(event.target.value)}
-                        value={senha}
+                        onChange={event => setPassword(event.target.value)}
+                        value={password}
                     />
                     <button type="submit" className="button" >Entrar</button>
                </form>
