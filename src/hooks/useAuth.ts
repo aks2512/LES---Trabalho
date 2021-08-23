@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import api from '../api';
 
 export default function useAuth() {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState<boolean|null>();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<string|null>();
-  const history = useHistory();
 
   useEffect(() => {
     let userExist = localStorage.getItem('token');
@@ -16,7 +14,11 @@ export default function useAuth() {
       setUser(username)
       api.defaults.headers.Authorization = `Bearer ${userExist}`;
       setAuthenticated(true);
-    } 
+    } else {
+      setUser(null);
+      setAuthenticated(false);
+      api.defaults.headers.Authorization = undefined;
+    }
     setLoading(false);
   }, []);
   
@@ -32,7 +34,6 @@ export default function useAuth() {
       setUser(userDB.data.returnData.cli_pnome);
       setAuthenticated(true);
     }
-    history.push('/detalhesDaConta');
   }
 
   async function handleLogout() {
@@ -41,8 +42,7 @@ export default function useAuth() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     api.defaults.headers.Authorization = undefined;
-    history.push('/');
   }
   
-  return { user, setUser, authenticated, loading, handleLogin, handleLogout };
+  return { user, setUser, authenticated, setAuthenticated, loading, handleLogin, handleLogout };
 }

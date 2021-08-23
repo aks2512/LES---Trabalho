@@ -1,8 +1,9 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../styles/headerMenu.scss';
 
-import useAuth from '../hooks/useAuth';
+import { Context } from '../contexts/AuthContext'
 
 import { ShoppingCart } from './ShoppingCart';
 
@@ -11,7 +12,7 @@ type headerMenuProps = {
 }
 
 export function HeaderMenu(props:headerMenuProps) {
-    const { authenticated, user, handleLogout} = useAuth();
+    const { authenticated, user, handleLogout} = useContext(Context);
 
     return (
         <ul className="header__menu col-md-6">

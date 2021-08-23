@@ -1,15 +1,15 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useContext } from "react";
 
 import '../styles/loginForm.scss';
 
-import useAuth from '../hooks/useAuth';
+import { Context } from '../contexts/AuthContext'
 
 type loginFormProps = {
     setShowLoginForm:Function,
 }
 
 export function LoginForm(props:loginFormProps) {
-    const {handleLogin} = useAuth();
+    const {handleLogin} = useContext(Context);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,7 +23,7 @@ export function LoginForm(props:loginFormProps) {
         <div className="login__form" >
             <div className="boxMessage">
                <h1>Entre com a sua conta</h1>
-               <form onSubmit={formSubmit}>
+               <form onSubmit={e => formSubmit(e)}>
                     <input
                         type="email"
                         placeholder="Email"

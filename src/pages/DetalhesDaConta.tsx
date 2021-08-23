@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, FormEvent } from "react";
+import { useLayoutEffect, useState, FormEvent, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { Header } from "../components/Header";
@@ -7,13 +7,13 @@ import { Form } from "../components/Form";
 import { Cards } from "../components/Cards";
 import { Card } from "../components/Card";
 
-import useAuth from '../hooks/useAuth';
+import { Context } from "../contexts/AuthContext";
 
 import api from "../api";
 
 export function DetalhesDaConta() {
     const history = useHistory();
-    const { setUser } = useAuth();
+    const { handleLogout } = useContext(Context);
     const [pnome, setPnome] = useState('');
     const [unome, setUnome] = useState('');
     const [rg, setRg] = useState('');
@@ -46,9 +46,8 @@ export function DetalhesDaConta() {
             "cli_telefone": telefone,
             "cli_senha": "teste",
         });
+        handleLogout();
         history.push('/');
-        setUser(pnome);
-        localStorage.setItem('username', pnome)
     }
 
     return(
