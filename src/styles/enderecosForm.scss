@@ -1,6 +1,10 @@
+@import 'variables';
 .enderecos__form{
     display:grid;
+    background-color:$blue3;
     grid-template-columns: 1fr;
+    border-radius: 20px;
+    padding: 10px;
     gap: 10px;
     &__tipos{
         display:grid;

@@ -42,8 +42,10 @@ export function CadastroCliente() {
                         modalMessage="Cadastrado com sucesso"    
                     >
                         <DadosPessoais/>
-                        <button type="button" onClick={(e)=>addEnderecos()}>+</button>
-                        <button type="button" onClick={(e)=>rmEnderecos()}>-</button>
+                        <div className="form__body_btngroup">
+                            <button type="button" className="form__body__button" onClick={(e)=>addEnderecos()}>+</button>
+                            <button type="button" className="form__body__button" onClick={(e)=>rmEnderecos()}>-</button>
+                        </div>
                         <Endereco/>
                         <Endereco/>
 
