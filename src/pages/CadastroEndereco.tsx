@@ -1,7 +1,7 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Form } from '../components/Form';
-
+import { Endereco} from '../components/Endereco';
 export function CadastroEndereco() {
     return (
         <>
@@ -15,12 +15,7 @@ export function CadastroEndereco() {
                         buttonText="Cadastrar"    
                         modalMessage="Cadastrado com sucesso"  
                     >
-                        <input type="text" placeholder="Logradouro" />
-                        <input type="text" placeholder="Numero" />
-                        <input type="text" placeholder="Cidade" />
-                        <input type="text" placeholder="Estado" />
-                        <input type="text" placeholder="Bairro" />
-                        <input type="text" placeholder="CEP" />
+                        <Endereco/>
                     </Form>
                 </div>
             </main>
