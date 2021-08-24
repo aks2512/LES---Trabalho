@@ -1,10 +1,10 @@
-.dados__pessoais{
+.enderecos__form{
     display:grid;
     grid-template-columns: 1fr;
     gap: 10px;
-    &__nome{
+    &__tipos{
         display:grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr;
         gap: 10px;
     }
     &__outros{
@@ -12,9 +12,9 @@
         grid-template-columns: 1fr 1fr;
         gap: 10px;
     }
-    &__usuario{
+    &__detalhesRua{
         display:grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 3fr 1fr;
         gap: 10px;
     }
 }

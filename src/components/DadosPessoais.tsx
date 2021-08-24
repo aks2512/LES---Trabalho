@@ -1,4 +1,4 @@
-import { useContext, useState, FormEvent } from 'react';
+import { useContext, useState, FormEvent, ChangeEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Context } from '../contexts/AuthContext';
 import '../styles/dadosPessoais.scss'
@@ -7,48 +7,56 @@ import api from '../api';
 export function DadosPessoais() {
     const history = useHistory();
     const { handleLogin } = useContext(Context);
-    const [pnome, setPnome] = useState('');
-    const [unome, setUnome] = useState('');
-    const [rg, setRg] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [email, setEmail] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [cliente, setCliente] = useState({ "cli_senha": '', "cli_confsenha": '' });
+
+    /*  "cli_pnome": pnome,
+        "cli_unome": unome,
+        "cli_rg": rg,
+        "cli_cpf": cpf,
+        "cli_email": email,
+        "cli_telefone": telefone,
+        "cli_senha": password, */
 
     async function insertClientForm(e: FormEvent) {
         e.preventDefault();
-        if (password === confirmPassword) {
-            await api.post('clientes/insert', {
-                "cli_pnome": pnome,
-                "cli_unome": unome,
-                "cli_rg": rg,
-                "cli_cpf": cpf,
-                "cli_email": email,
-                "cli_telefone": telefone,
-                "cli_senha": password,
-            });
+        if (cliente.cli_senha === cliente.cli_confsenha) {
+
+        } else {
+            alert("senhas vefirique a confirmação da senha!")
         }
-        handleLogin(email, password);
-        history.push('/cadastroEndereco');
+        handleLogin(cliente.cli_senha, cliente.cli_confsenha);
+        history.push('/cadastroCliente');
+    }
+
+    function handleCliente(e: ChangeEvent<HTMLInputElement>) {
+        const value = e.target.value;
+        setCliente({
+            ...cliente,
+            [e.target.name]: value
+        });
+        console.log(cliente)
     }
 
     return (
-        <div className="dados_pessoais">
-            <input className="col-md-4 " onChange={e => setPnome(e.target.value)} value={pnome} type="text" placeholder="Primeiro Nome" />
-            <input className="col-md-8" onChange={e => setUnome(e.target.value)} value={unome} type="text" placeholder="Ultimo Nome" />
-            <input className="col-md-6" onChange={e => setRg(e.target.value)} value={rg} type="text" placeholder="RG" />
-            <input className="col-md-6" onChange={e => setCpf(e.target.value)} value={cpf} type="text" placeholder="CPF" />
-            <input className="col-md-6" onChange={e => setEmail(e.target.value)} value={email} type="email" placeholder="Email" />
-            <input className="col-md-6" onChange={e => setTelefone(e.target.value)} value={telefone} type="tel" placeholder="Telefone" />
-            <select className="col-md-6" name="sexo" id="">
-                <option value="masculino">Masculino</option>
-                <option value="feminino">Feminino</option>
-                <option value="outro">Outro</option>
-            </select>
-            <div className="col-md-12">
-                <input className="col-md-6" onChange={e => setPassword(e.target.value)} value={password} type="password" placeholder="Senha" />
-                <input className="col-md-6" onChange={e => setConfirmPassword(e.target.value)} value={confirmPassword} type="password" placeholder="Confirmar Senha" />
+        <div className="dados__pessoais">
+            <div className="dados__pessoais__nome">
+                <input name="cli_pnome" onChange={e => handleCliente(e)} type="text" placeholder="Primeiro Nome" />
+                <input name="cli_unome" onChange={e => handleCliente(e)} type="text" placeholder="Ultimo Nome" />
+            </div>
+            <div className="dados__pessoais__outros">
+                <input name="cli_rg" onChange={e => handleCliente(e)} type="text" placeholder="RG" />
+                <input name="cli_cpf" onChange={e => handleCliente(e)} type="text" placeholder="CPF" />
+                <input name="cli_email" onChange={e => handleCliente(e)} type="email" placeholder="Email" />
+                <input name="cli_telefone" onChange={e => handleCliente(e)} type="tel" placeholder="Telefone" />
+                <select name="sexo" id="">
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+            <div className="dados__pessoais__usuario">
+                <input name="cli_senha" onChange={e => handleCliente(e)} type="password" placeholder="Senha" />
+                <input name="cli_confsenha" onChange={e => handleCliente(e)} type="password" placeholder="Confirmar Senha" />
             </div>
         </div>
 

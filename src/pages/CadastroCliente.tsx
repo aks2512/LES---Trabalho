@@ -13,30 +13,20 @@ import api from '../api';
 export function CadastroCliente() {
     const history = useHistory();
     const { handleLogin } = useContext(Context);
-    const [pnome, setPnome] = useState('');
-    const [unome, setUnome] = useState('');
-    const [rg, setRg] = useState('');
-    const [cpf, setCpf] = useState('');
-    const [email, setEmail] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [enderecos,setEnderecos] = useState([{}]);
 
-    async function insertClientForm(e:FormEvent) {
-        e.preventDefault();
-        if(password === confirmPassword) {
-            await api.post('clientes/insert', {
-                "cli_pnome": pnome,
-                "cli_unome": unome,
-                "cli_rg": rg,
-                "cli_cpf": cpf,
-                "cli_email": email,
-                "cli_telefone": telefone,
-                "cli_senha": password,
-            });
-        }
-        handleLogin(email, password);
-        history.push('/cadastroEndereco');
+    async function postCliente(){
+        
+    }
+
+    async function addEnderecos(){
+        enderecos.push({"nome":"entrega1"});
+        console.log(enderecos);
+    }
+
+    async function rmEnderecos(){
+        enderecos.pop();
+        console.log(enderecos);
     }
 
     return (
@@ -45,15 +35,18 @@ export function CadastroCliente() {
             <main>
                 <div className="container">
                     <Form 
-                        submitFunction={insertClientForm}
+                        submitFunction={()=>console.log("a")}
                         title="Cadastre-se" 
                         about="Usuário"
                         buttonText="Criar conta"
                         modalMessage="Cadastrado com sucesso"    
                     >
                         <DadosPessoais/>
+                        <button type="button" onClick={(e)=>addEnderecos()}>+</button>
+                        <button type="button" onClick={(e)=>rmEnderecos()}>-</button>
                         <Endereco/>
                         <Endereco/>
+
                     </Form>
                 </div>
             </main>
