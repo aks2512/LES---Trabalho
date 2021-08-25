@@ -15,7 +15,7 @@ export function CadastroEndereco() {
                         buttonText="Cadastrar"    
                         modalMessage="Cadastrado com sucesso"  
                     >
-                    <Endereco/>
+                    {/* <Endereco/> */}
                     </Form>
                 </div>
             </main>

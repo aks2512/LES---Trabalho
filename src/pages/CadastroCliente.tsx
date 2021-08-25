@@ -9,24 +9,32 @@ import { DadosPessoais } from '../components/DadosPessoais';
 import { Context } from '../contexts/AuthContext';
 
 import api from '../api';
+import ReactDOM from 'react-dom';
 
 export function CadastroCliente() {
     const history = useHistory();
     const { handleLogin } = useContext(Context);
     const [enderecos,setEnderecos] = useState([{}]);
+    const [cliente, setCliente] = useState({});
 
-    async function postCliente(){
-        
+    function enderecosHandler(enderecos:Object){
+
     }
 
-    async function addEnderecos(){
-        enderecos.push({"nome":"entrega1"});
-        console.log(enderecos);
+    function postCliente(){
+
     }
 
-    async function rmEnderecos(){
-        enderecos.pop();
-        console.log(enderecos);
+    function addEnderecos(){
+        var temp_end = enderecos;
+        temp_end.push({});
+        setEnderecos([...temp_end]);
+    }
+
+    function rmEnderecos(){
+        var temp_end = enderecos;
+        temp_end.pop();
+        setEnderecos([...temp_end]);
     }
 
     return (
@@ -35,7 +43,7 @@ export function CadastroCliente() {
             <main>
                 <div className="container">
                     <Form 
-                        submitFunction={()=>console.log("a")}
+                        submitFunction={()=>postCliente()}
                         title="Cadastre-se" 
                         about="Usuário"
                         buttonText="Criar conta"
@@ -46,9 +54,9 @@ export function CadastroCliente() {
                             <button type="button" className="form__body__button" onClick={(e)=>addEnderecos()}>+</button>
                             <button type="button" className="form__body__button" onClick={(e)=>rmEnderecos()}>-</button>
                         </div>
-                        <Endereco/>
-                        <Endereco/>
-
+                        {enderecos.map((itens, index) =>(                
+                                <Endereco key={index} callback={()=>{enderecosHandler(enderecos)}}/>                    
+                        ))}
                     </Form>
                 </div>
             </main>

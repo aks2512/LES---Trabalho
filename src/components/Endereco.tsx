@@ -5,6 +5,7 @@ import {  FormEvent, useState, ChangeEvent} from 'react';
 
 type endProps = {
     index?:string
+    callback:Function
 }
 
 export function Endereco(props:endProps) {
@@ -30,21 +31,22 @@ export function Endereco(props:endProps) {
             [e.target.name]: value
         });
         console.log(endereco)
+        props.callback(endereco);
     }
 
     return (
         <>
             <hr></hr>
             <div className="enderecos__form justify-content-between">
-                <input type="text" name="end_nome" placeholder="Nome do Endereco"  onChange={e=>handleEndereco(e)}/>
+                <input type="text" name="end_nome" className="enderecos__form__titulo" placeholder="Nome do Endereco"  onChange={e=>handleEndereco(e)}/>
                 <div className="enderecos__form__tipos">
                     <label htmlFor="end_tipo">Tipo de Endereço</label>
-                    <select name="end_tipo" id="">
+                    <select name="end_tipo" id="" /* onSelect={e=>handleEndereco(e)} */>
                         <option value="entrega">Entrega</option>
                         <option value="cobranca">Cobrança</option>
                     </select>
                     <label htmlFor="end_tipo_residencia">Tipo de Residência</label>
-                    <select name="end_tipo_residencia" id="">
+                    <select name="end_tipo_residencia" id="" /* onChange={e=>handleEndereco(e)} */>
                         <option value="casa">Casa</option>
                         <option value="apartamento">Apartamento</option>
                         <option value="condominio">Condomínio</option>
@@ -54,17 +56,17 @@ export function Endereco(props:endProps) {
                     <input type="text" name="end_cep" placeholder="CEP" onChange={e=>handleEndereco(e)}/>
                 </div>
                 <div className="enderecos__form__outros">
-                    <select name="end_pais" id="">
+                    <select name="end_pais" id="" /* onChange={e=>handleEndereco(e)} */>
                         <option value="brasil">Brasil</option>
                         <option value="argentina">Argentina</option>
                     </select>
-                    <input type="text" name="cidade" placeholder="Cidade" />
-                    <input type="text" name="estado" placeholder="Estado" />
-                    <input type="text" name="bairro" placeholder="Bairro" />
+                    <input type="text" name="cidade" placeholder="Cidade" onChange={e=>handleEndereco(e)}/>
+                    <input type="text" name="estado" placeholder="Estado" onChange={e=>handleEndereco(e)} />
+                    <input type="text" name="bairro" placeholder="Bairro" onChange={e=>handleEndereco(e)}/>
                 </div>
                 <div className="enderecos__form__detalhesRua">
-                    <input type="text" name="logradouro" placeholder="Logradouro" />
-                    <input type="number" name="numero" placeholder="Numero" />
+                    <input type="text" name="logradouro" placeholder="Logradouro" onChange={e=>handleEndereco(e)}/>
+                    <input type="number" name="numero" placeholder="Numero" onChange={e=>handleEndereco(e)}/>
                 </div>
             </div>
         </>
