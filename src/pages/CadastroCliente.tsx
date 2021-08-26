@@ -17,12 +17,18 @@ export function CadastroCliente() {
     const [enderecos,setEnderecos] = useState([{}]);
     const [cliente, setCliente] = useState({});
 
-    function enderecosHandler(enderecos:Object){
-
+    function enderecosHandler(endereco:Object,key:number){
+        let temp_enderecos = enderecos;
+        temp_enderecos[key] = endereco;
+        setEnderecos(temp_enderecos);
+        console.log("Enderecos:",enderecos)
     }
 
     function postCliente(){
-
+        enderecos.map((item,index)=>{
+            console.log(item)
+        })
+        
     }
 
     function addEnderecos(){
@@ -55,7 +61,7 @@ export function CadastroCliente() {
                             <button type="button" className="form__body__button" onClick={(e)=>rmEnderecos()}>-</button>
                         </div>
                         {enderecos.map((itens, index) =>(                
-                                <Endereco key={index} callback={()=>{enderecosHandler(enderecos)}}/>                    
+                                <Endereco key={index} index={index} callback={(e:Object)=>{enderecosHandler(e,index)}}/>                    
                         ))}
                     </Form>
                 </div>
