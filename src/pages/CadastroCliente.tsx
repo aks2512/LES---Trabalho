@@ -14,30 +14,39 @@ import ReactDOM from 'react-dom';
 export function CadastroCliente() {
     const history = useHistory();
     const { handleLogin } = useContext(Context);
-    const [enderecos,setEnderecos] = useState([{}]);
+    const [enderecos, setEnderecos] = useState([{}]);
     const [cliente, setCliente] = useState({});
 
-    function enderecosHandler(endereco:Object,key:number){
+    const tiposExigidos = ["cobranca","entrega"];
+
+    function enderecosHandler(endereco: Object, key: number) {
         let temp_enderecos = enderecos;
         temp_enderecos[key] = endereco;
         setEnderecos(temp_enderecos);
-        console.log("Enderecos:",enderecos)
+        console.log("Enderecos:", enderecos)
     }
 
-    function postCliente(){
-        enderecos.map((item,index)=>{
-            console.log(item)
+    async function postCliente(e:FormEvent) {
+        e.preventDefault();
+        let validaTipos = tiposExigidos;
+        enderecos.forEach((item) => {
+            let tipoIndex = validaTipos.indexOf(item["end_tipo" as keyof typeof item])
+            if(tipoIndex>=0) validaTipos.splice(tipoIndex,1);
         })
-        
+        if (Object.keys(validaTipos).length != 0) {
+            console.log(validaTipos);
+        }
     }
 
-    function addEnderecos(){
+    function addEnderecos() {
         var temp_end = enderecos;
         temp_end.push({});
         setEnderecos([...temp_end]);
+
+        var k = document.getElementsByClassName('enderecos__form')
     }
 
-    function rmEnderecos(){
+    function rmEnderecos() {
         var temp_end = enderecos;
         temp_end.pop();
         setEnderecos([...temp_end]);
@@ -48,20 +57,22 @@ export function CadastroCliente() {
             <Header />
             <main>
                 <div className="container">
-                    <Form 
-                        submitFunction={()=>postCliente()}
-                        title="Cadastre-se" 
+                    <Form
+                        submitFunction={(e:FormEvent) => postCliente(e)}
+                        title="Cadastre-se"
                         about="Usuário"
                         buttonText="Criar conta"
-                        modalMessage="Cadastrado com sucesso"    
+                        modalMessage="Cadastrado com sucesso"
                     >
-                        <DadosPessoais/>
-                        <div className="form__body_btngroup">
-                            <button type="button" className="form__body__button" onClick={(e)=>addEnderecos()}>+</button>
-                            <button type="button" className="form__body__button" onClick={(e)=>rmEnderecos()}>-</button>
+                        <DadosPessoais />
+                        <hr></hr>
+                        <div className="form__body__btngroup">
+                            <button type="button" className="form__body__button" onClick={(e) => addEnderecos()}>Adicionar</button>
+                            <button type="button" className="form__body__button" onClick={(e) => rmEnderecos()}>Remover</button>
                         </div>
-                        {enderecos.map((itens, index) =>(                
-                                <Endereco key={index} index={index} callback={(e:Object)=>{enderecosHandler(e,index)}}/>                    
+                        <div className="cliente__form__enderecoIndicator">Enderecos</div>
+                        {enderecos.map((itens, index) => (
+                            <Endereco key={index} index={index} callback={(e: Object) => { enderecosHandler(e, index) }} />
                         ))}
                     </Form>
                 </div>

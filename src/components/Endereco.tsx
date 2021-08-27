@@ -37,9 +37,8 @@ export function Endereco(props:endProps) {
     }
 
     return (
-        <>
-            <hr></hr>
-            <div className="enderecos__form justify-content-between">
+        <div>
+            <div className="enderecos__form justify-content-between animate__animated animate__backInDown">
                 <div className="enderecos__form__index">Endereco - ({props.index})</div>
                 <label htmlFor="end_nome">Nome do Endereco</label>
                 <input type="text" name="end_nome" className="enderecos__form__titulo" placeholder="Nome do Endereco" value={endereco.end_nome}  onChange={(e:any)=>handleEndereco(e)}/>
@@ -73,6 +72,6 @@ export function Endereco(props:endProps) {
                     <input type="number" name="numero" placeholder="Numero" onChange={(e:any)=>handleEndereco(e)}/>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
