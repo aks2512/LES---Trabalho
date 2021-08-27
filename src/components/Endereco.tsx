@@ -47,6 +47,7 @@ export function Endereco(props:endProps) {
                     <select name="end_tipo" id="" onChange={(e:any)=>handleEndereco(e)} value={endereco.end_tipo}>
                         <option value="entrega">Entrega</option>
                         <option value="cobranca">Cobrança</option>
+                        <option value="ambos">Cobrança/Entrega</option>
                     </select>
                     <label htmlFor="end_tipo_residencia">Tipo de Residência</label>
                     <select name="end_tipo_residencia" id="" onChange={(e:any)=>handleEndereco(e)} value={endereco.end_tipo_residencia}>

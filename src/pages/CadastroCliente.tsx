@@ -30,6 +30,7 @@ export function CadastroCliente() {
         e.preventDefault();
         let validaTipos = tiposExigidos;
         enderecos.forEach((item) => {
+            if(item["end_tipo" as keyof typeof item]==="ambos") validaTipos = []
             let tipoIndex = validaTipos.indexOf(item["end_tipo" as keyof typeof item])
             if(tipoIndex>=0) validaTipos.splice(tipoIndex,1);
         })
