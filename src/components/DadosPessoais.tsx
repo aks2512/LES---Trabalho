@@ -43,16 +43,19 @@ export function DadosPessoais() {
                 <input name="cli_pnome" onChange={e => handleCliente(e)} type="text" placeholder="Primeiro Nome" />
                 <input name="cli_unome" onChange={e => handleCliente(e)} type="text" placeholder="Ultimo Nome" />
             </div>
+            <div className="dados__pessoais__pessoa">
+                    <input name="cli_dtnascimento" onChange={e => handleCliente(e)} type="date" placeholder="" />
+                    <input name="cli_rg" onChange={e => handleCliente(e)} type="text" placeholder="RG" />
+                    <input name="cli_cpf" onChange={e => handleCliente(e)} type="text" placeholder="CPF" />
+                    <select name="sexo" id="">
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outro">Outro</option>
+                    </select>
+            </div>
             <div className="dados__pessoais__outros">
-                <input name="cli_rg" onChange={e => handleCliente(e)} type="text" placeholder="RG" />
-                <input name="cli_cpf" onChange={e => handleCliente(e)} type="text" placeholder="CPF" />
                 <input name="cli_email" onChange={e => handleCliente(e)} type="email" placeholder="Email" />
                 <input name="cli_telefone" onChange={e => handleCliente(e)} type="tel" placeholder="Telefone" />
-                <select name="sexo" id="">
-                    <option value="masculino">Masculino</option>
-                    <option value="feminino">Feminino</option>
-                    <option value="outro">Outro</option>
-                </select>
             </div>
             <div className="dados__pessoais__usuario">
                 <input name="cli_senha" onChange={e => handleCliente(e)} type="password" placeholder="Senha" />

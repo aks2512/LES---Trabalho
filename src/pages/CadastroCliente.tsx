@@ -66,11 +66,12 @@ export function CadastroCliente() {
                     >
                         <DadosPessoais />
                         <hr></hr>
+                        <h1 className="cliente__form__enderecoIndicator form__title">Enderecos</h1>
                         <div className="form__body__btngroup">
                             <button type="button" className="form__body__button" onClick={(e) => addEnderecos()}>Adicionar</button>
                             <button type="button" className="form__body__button" onClick={(e) => rmEnderecos()}>Remover</button>
                         </div>
-                        <div className="cliente__form__enderecoIndicator">Enderecos</div>
+                        
                         {enderecos.map((itens, index) => (
                             <Endereco key={index} index={index} callback={(e: Object) => { enderecosHandler(e, index) }} />
                         ))}
