@@ -2,7 +2,7 @@ import '../styles/enderecosForm.scss'
 import api from '../api';
 import { useHistory } from 'react-router-dom';
 import {  FormEvent, useState, ChangeEvent, useEffect} from 'react';
-
+import '../styles/animation.scss'
 type endProps = {
     key:number
     index:number
@@ -39,8 +39,8 @@ export function Endereco(props:endProps) {
     return (
         <>
             <hr></hr>
-            <div className="enderecos__form justify-content-between">
-                <div className="enderecos__form__index">Endereco - ({props.index})</div>
+            <div className="enderecos__form justify-content-between animate__backInUp animate__animated">
+                <div className="enderecos__form__index">Endereco - ({props.index+1})</div>
                 <label htmlFor="end_nome">Nome do Endereco</label>
                 <input type="text" name="end_nome" className="enderecos__form__titulo" placeholder="Nome do Endereco" value={endereco.end_nome}  onChange={(e:any)=>handleEndereco(e)}/>
                 <div className="enderecos__form__tipos">
