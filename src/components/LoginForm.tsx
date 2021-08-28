@@ -18,7 +18,7 @@ export function LoginForm(props:loginFormProps) {
         await handleLogin(email, password);
         props.setShowLoginForm(false);
     }
-    
+
     return (
         <div className="login__form" >
             <div className="boxMessage">

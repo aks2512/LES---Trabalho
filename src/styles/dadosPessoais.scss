@@ -9,12 +9,17 @@
     }
     &__outros{
         display:grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 11fr 1fr 10fr;
         gap: 10px;
     }
     &__usuario{
         display:grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+    }
+    &__pessoa{
+        display:grid;
+        grid-template-columns: 2fr 4fr 4fr 2fr;
         gap: 10px;
     }
 }
