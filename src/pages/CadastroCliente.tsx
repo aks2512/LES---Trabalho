@@ -1,19 +1,21 @@
-import { useContext, useState, FormEvent, useEffect } from "react";
+//Dependências
+import { useState, FormEvent, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
+//Componentes
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { Form } from "../components/Form";
 import { Endereco } from "../components/Endereco";
 import { DadosPessoais } from "../components/DadosPessoais";
-import { Context } from "../contexts/AuthContext";
 
+//API
 import api from "../api";
-import ReactDOM from "react-dom";
+
+
 
 export function CadastroCliente() {
   const history = useHistory();
-  const { handleLogin } = useContext(Context);
   const [enderecos, setEnderecos] = useState([{}]);
   const [cliente, setCliente] = useState({});
 
@@ -23,17 +25,17 @@ export function CadastroCliente() {
     console.log("Search message inside useEffect: ", enderecos);
   }, [enderecos]);
 
-  function enderecosHandler(endereco: Object, key: number) {
+  function enderecosHandler(endereco: Object, key: number) {////Atualiza a lista de enderecos do formulario atráves do componente Endereco
     let temp_enderecos = enderecos;
     temp_enderecos[key] = endereco;
     setEnderecos(temp_enderecos);
   }
 
-  function clienteHandler(cliente: Object) {
+  function clienteHandler(cliente: Object) {//Atualiza o cliente do formulario atráves do componente DadosPessoais
     setCliente(cliente);
   }
 
-  async function postCliente(e: FormEvent) {
+  async function postCliente(e: FormEvent) {//Prepara e pede para API cadastrar o cliente no banco de dados
     e.preventDefault();
     let validaTipos = tiposExigidos;
     enderecos.forEach((item) => {
@@ -45,20 +47,17 @@ export function CadastroCliente() {
     });
     if (Object.keys(validaTipos).length != 0) {
     }
-    console.log(cliente);
     const request = await api.post("/clientes/insert", cliente);
     console.log(request);
   }
 
-  function addEnderecos() {
+  function addEnderecos() {//Adiciona Campos de Endereço
     var temp_end = enderecos;
     temp_end.push({});
     setEnderecos([...temp_end]);
-
-    var k = document.getElementsByClassName("enderecos__form");
   }
 
-  function rmEnderecos() {
+  function rmEnderecos() {//Remove Campos de Endereço
     var temp_end = enderecos;
     temp_end.pop();
     setEnderecos([...temp_end]);
@@ -68,7 +67,7 @@ export function CadastroCliente() {
     <>
       <Header />
       <main>
-        <div className="container">
+        <div className="container cliente__form__cadastro">
           <Form
             submitFunction={(e: FormEvent) => postCliente(e)}
             title="Cadastre-se"
@@ -80,7 +79,9 @@ export function CadastroCliente() {
               callback={(e: Object) => {
                 clienteHandler(e);
               }}
+              formSenha={true}
             />
+
             <hr></hr>
             <h1 className="cliente__form__enderecoIndicator form__title">
               Enderecos

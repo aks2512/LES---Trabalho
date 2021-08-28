@@ -1,8 +1,16 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Form } from '../components/Form';
+import { Endereco } from '../components/Endereco';
+import { useState } from 'react';
 
 export function EditarEndereco() {
+    const [endereco, setEnderecos] = useState({});
+
+    function enderecosHandler(endereco: Object) {////Atualiza a lista de enderecos do formulario atráves do componente Endereco
+        setEnderecos(endereco);
+    }
+
     return (
         <>
             <Header />
@@ -15,12 +23,7 @@ export function EditarEndereco() {
                         buttonText="Atualizar"    
                         modalMessage="Atualizado com sucesso" 
                     >
-                        <input type="text" placeholder="Logradouro" />
-                        <input type="text" placeholder="Numero" />
-                        <input type="text" placeholder="Cidade" />
-                        <input type="text" placeholder="Estado" />
-                        <input type="text" placeholder="Bairro" />
-                        <input type="text" placeholder="CEP" />
+                        <Endereco callback={(end:Object)=>enderecosHandler(end)}/>
                     </Form>
                 </div>
             </main>

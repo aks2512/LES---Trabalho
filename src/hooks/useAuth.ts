@@ -24,14 +24,16 @@ export default function useAuth() {
   
   async function handleLogin(email: string, password: string) {
     const userDB = await api.post('/auth',({
-      "email" : email,
-      "senha" : password
+      "cli_email" : email,
+      "cli_senha" : password,
+      "type"  : "cliente"
     }));
-    if (userDB.data.returnData && userDB.data.token) {
+    console.log(userDB)
+    if (userDB.data.result && userDB.data.token) {
       localStorage.setItem('token', userDB.data.token);
-      localStorage.setItem('username', userDB.data.returnData.cli_pnome)
+      localStorage.setItem('username', userDB.data.result.cli_pnome)
       api.defaults.headers.Authorization = `Bearer ${userDB.data.token}`;
-      setUser(userDB.data.returnData.cli_pnome);
+      setUser(userDB.data.result.cli_pnome);
       setAuthenticated(true);
     }
   }

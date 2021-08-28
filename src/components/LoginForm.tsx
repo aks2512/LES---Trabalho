@@ -1,8 +1,9 @@
+//Dependências
 import { useState, FormEvent, useContext } from "react";
-
-import '../styles/loginForm.scss';
-
 import { Context } from '../contexts/AuthContext'
+
+//CSS/SCSS
+import '../styles/loginForm.scss';
 
 type loginFormProps = {
     setShowLoginForm:Function,

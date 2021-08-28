@@ -4,8 +4,22 @@ import { useHistory } from "react-router-dom";
 import { FormEvent, useState, ChangeEvent, useEffect } from "react";
 
 type endProps = {
-  index: number;
+  index?: number;
   callback: Function;
+  endereco?: {
+    end_nome: string,
+    end_tipo: string,
+    end_tresidencia: string,
+    end_tlogradouro: string,
+    end_pais: string,
+    end_cep:  string,
+    end_numero: string,
+    end_logradouro: string,
+    end_complemento: string,
+    end_bairro: string,
+    end_cidade: string,
+    end_estado: string
+  }
 };
 
 export function Endereco(props: endProps) {
@@ -13,9 +27,10 @@ export function Endereco(props: endProps) {
   const [endereco, setEndereco] = useState({
     end_nome: "",
     end_tipo: "",
-    end_tipo_residencia: "",
+    end_tresidencia: "",
+    end_tlogradouro: "",
     end_pais: "",
-    end_cep: "",
+    end_cep:  "",
     end_numero: "",
     end_logradouro: "",
     end_complemento: "",
@@ -35,11 +50,15 @@ export function Endereco(props: endProps) {
       [e.target.name]: value
     });
   }
-
+  const renderIndex = () => {
+      if(typeof props.index !== undefined){
+        return <div className="enderecos__form__index">Endereco - ({props.index})</div>
+      }
+  }
   return (
     <div>
       <div className="enderecos__form justify-content-between animate__animated animate__backInDown">
-        <div className="enderecos__form__index">Endereco - ({props.index})</div>
+        {renderIndex()}
         <label htmlFor="end_nome">Nome do Endereco</label>
         <input
           type="text"
@@ -50,28 +69,32 @@ export function Endereco(props: endProps) {
           onChange={(e: any) => handleEndereco(e)}
         />
         <div className="enderecos__form__tipos">
-          <label htmlFor="end_tipo">Tipo de Endereço</label>
-          <select
-            name="end_tipo"
-            id=""
-            onChange={(e: any) => handleEndereco(e)}
-            value={endereco.end_tipo}
-          >
-            <option value="entrega">Entrega</option>
-            <option value="cobranca">Cobrança</option>
-            <option value="ambos">Cobrança/Entrega</option>
-          </select>
-          <label htmlFor="end_tipo_residencia">Tipo de Residência</label>
-          <select
-            name="end_tipo_residencia"
-            id=""
-            onChange={(e: any) => handleEndereco(e)}
-            value={endereco.end_tipo_residencia}
-          >
-            <option value="casa">Casa</option>
-            <option value="apartamento">Apartamento</option>
-            <option value="condominio">Condomínio</option>
-          </select>
+          <div className="labeled__input">
+            <label htmlFor="end_tipo">Tipo de Endereço</label>
+            <select
+              name="end_tipo"
+              id=""
+              onChange={(e: any) => handleEndereco(e)}
+              value={endereco.end_tipo}
+            >
+              <option value="entrega">Entrega</option>
+              <option value="cobranca">Cobrança</option>
+              <option value="ambos">Cobrança/Entrega</option>
+            </select>
+          </div>
+          <div className="labeled__input">
+            <label htmlFor="end_tipo_residencia">Tipo de Residência</label>
+            <select
+              name="end_tresidencia"
+              id=""
+              onChange={(e: any) => handleEndereco(e)}
+              value={endereco.end_tresidencia}
+            >
+              <option value="casa">Casa</option>
+              <option value="apartamento">Apartamento</option>
+              <option value="condominio">Condomínio</option>
+            </select>
+          </div>
         </div>
         <div className="enderecos__form__outros">
           <input
@@ -117,14 +140,30 @@ export function Endereco(props: endProps) {
         <div className="enderecos__form__detalhesRua">
           <input
             type="text"
-            name="logradouro"
+            name="end_logradouro"
             placeholder="Logradouro"
             onChange={(e: any) => handleEndereco(e)}
           />
+          <select 
+            name="" 
+            onChange={(e: any) => handleEndereco(e)}
+            value={endereco.end_tipo}>
+            <option value="avenida">Avenida</option>
+            <option value="rua">Rua</option>
+            <option value="condominio">Condominio</option>
+            <option value="campo">Campo</option>
+            <option value="area">Área</option>
+          </select>
           <input
             type="number"
-            name="numero"
+            name="end_numero"
             placeholder="Numero"
+            onChange={(e: any) => handleEndereco(e)}
+          />
+          <input
+            type="textarea"
+            name="end_observacao"
+            placeholder="Observacao"
             onChange={(e: any) => handleEndereco(e)}
           />
         </div>
