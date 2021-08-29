@@ -9,12 +9,11 @@ import '../styles/header.scss';
 
 export function Header() {
     const [showLoginForm, setShowLoginForm] = useState(false);
-
     return (
         <>
             <header className="header">
                 <div className="container">
-                    <Link className="header__logo col-md-6" to="/"><h1>Logo</h1></Link>
+                    <Link className="header__logo col-md-6" to="/"><img src={require("../assets/images/icone_elivros.png")} alt="" /></Link>
                     <HeaderMenu openLoginForm={()=>setShowLoginForm(!showLoginForm)}></HeaderMenu>
                 </div>
             </header>

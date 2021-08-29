@@ -1,5 +1,5 @@
 //Dependências
-import { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 //Componentes
@@ -12,12 +12,27 @@ import { DadosPessoais } from "../components/DadosPessoais";
 //API
 import api from "../api";
 
-
+//Contextos
+import { Context } from "../contexts/AuthContext";
 
 export function CadastroCliente() {
   const history = useHistory();
+  const { authenticated, user, handleLogout} = useContext(Context);
   const [enderecos, setEnderecos] = useState([{}]);
-  const [cliente, setCliente] = useState({});
+  const [cliente, setCliente] = useState({
+    cli_pnome:"",
+    cli_unome:"",
+    cli_rg:"", 
+    cli_cpf:"", 
+    cli_sexo:"",
+    cli_dtnascimento:"",
+    cli_email:"", 
+    cli_senha:"", 
+    cli_confsenha:"", 
+    cli_telefone:"", 
+    cli_ddd:"",
+    enderecos:[{}]
+  });
 
   const tiposExigidos = ["cobranca", "entrega"];
 
@@ -31,7 +46,7 @@ export function CadastroCliente() {
     setEnderecos(temp_enderecos);
   }
 
-  function clienteHandler(cliente: Object) {//Atualiza o cliente do formulario atráves do componente DadosPessoais
+  function clienteHandler(cliente: any) {//Atualiza o cliente do formulario atráves do componente DadosPessoais
     setCliente(cliente);
   }
 
@@ -46,9 +61,24 @@ export function CadastroCliente() {
       if (tipoIndex >= 0) validaTipos.splice(tipoIndex, 1);
     });
     if (Object.keys(validaTipos).length != 0) {
+      let str = ""
+      validaTipos.forEach((item)=>{
+        str += "\n"+item
+      })
+      alert("Precisa cadastrar pelo menos um endereço para:"+str)
     }
-    const request = await api.post("/clientes/insert", cliente);
-    console.log(request);
+
+    if(cliente.cli_senha!==cliente.cli_confsenha){
+      alert("Senha e confirmação de senha não conferem")
+    }
+
+    cliente.enderecos = enderecos
+
+    let res = await api.post("/clientes/insert", cliente);
+
+    if(res.status==200){
+      redirect();
+    }
   }
 
   function addEnderecos() {//Adiciona Campos de Endereço
@@ -61,6 +91,10 @@ export function CadastroCliente() {
     var temp_end = enderecos;
     temp_end.pop();
     setEnderecos([...temp_end]);
+  }
+
+  const redirect = () => {
+    history.push('/your-path')
   }
 
   return (

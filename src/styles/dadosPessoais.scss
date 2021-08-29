@@ -1,75 +1,81 @@
-.cliente__form__cadastro {
-    .dados__pessoais{
-        display:grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-        &__nome{
-            display:grid;
-            grid-template-columns: 1fr 3fr;
-            gap: 10px;
-        }
-        &__outros{
-            display:grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        &__usuario{
-            display:grid;
-            grid-template-columns: 1fr 1fr 50%;
-            gap: 10px;
-        }
-        &__telefone{
-            display:grid;
-            grid-template-columns: 1fr 4fr 50%;
-            gap: 10px;
-        }
-        &__pessoa{
-            display:grid;
-            grid-template-columns: 2fr 4fr 4fr 2fr;
-            gap: 10px;
-        }
-        .labeled__input{
+.cliente__form{
+    &__cadastro {
+        .dados__pessoais{
             display:grid;
             grid-template-columns: 1fr;
-            grid-template-rows: 25px 1fr;
+            gap: 10px;
+            &__nome{
+                display:grid;
+                grid-template-columns: 1fr 3fr;
+                gap: 10px;
+            }
+            &__outros{
+                display:grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            &__usuario{
+                display:grid;
+                grid-template-columns: 1fr 1fr 50%;
+                gap: 10px;
+            }
+            &__telefone{
+                display:grid;
+                grid-template-columns: 1fr 5fr 6fr;
+                gap: 10px;
+                input[name="cli_ddd"]{
+                    width: 75px;
+                }
+            }
+            &__pessoa{
+                display:grid;
+                grid-template-columns: 2fr 4fr 4fr 2fr;
+                gap: 10px;
+            }
+            .labeled__input{
+                display:grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 25px 1fr;
+            }
         }
     }
-}
 
-.cliente__form__alterar {
-    .dados__pessoais{
-        display:grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-        &__nome{
-            display:grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        &__outros{
-            display:grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        &__telefone{
-            display:grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        &__usuario{
-            display:grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        &__pessoa{
-            display:grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        .labeled__input{
+    &__alterar {
+        .dados__pessoais{
             display:grid;
             grid-template-columns: 1fr;
-            grid-template-rows: 25px 1fr;
+            gap: 10px;
+            &__nome{
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            &__outros{
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            &__telefone{
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            &__usuario{
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            &__pessoa{
+                display:grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .labeled__input{
+                display:grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: 25px 1fr;
+            }
         }
     }
+    
 }

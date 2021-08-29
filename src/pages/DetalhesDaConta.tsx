@@ -1,6 +1,6 @@
 //Dependências
 import { useState, FormEvent, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, Route, useHistory } from "react-router-dom";
 
 //Componentes
 import { Header } from "../components/Header";
@@ -18,8 +18,8 @@ import api from "../api";
 
 export function DetalhesDaConta() {
     const history = useHistory();
-    const { handleLogout } = useContext(Context);
-    const [cliente, setCliente] = useState({});
+    const { authenticated, user, handleLogout} = useContext(Context);
+    const [ cliente, setCliente] = useState({});
 
     function clienteHandler(cliente: Object) {
         setCliente(cliente);

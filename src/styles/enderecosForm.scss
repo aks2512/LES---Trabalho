@@ -1,12 +1,13 @@
 @import 'variables';
 .enderecos__form{
     display:grid;
-    background-color:$blue3;
+    background-color:$greyishBlue;
     grid-template-columns: 1fr;
     border-radius: 20px;
     padding: 10px;
     margin-top: 20px;
     gap: 10px;
+    
     &__index{
         text-align: center;
         color:$yellow;
@@ -27,9 +28,31 @@
         grid-template-columns: 3fr 1fr;
         gap: 10px;
     }
+    &__complemento{
+        display:grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+        "input"
+        "input";
+        gap: 10px;
+    }
     .labeled__input{
         display:grid;
         grid-template-columns: 1fr;
         grid-template-rows: 25px 1fr;
+        grid-area: 
+        "label"
+        "input";
+        label{
+            grid-area: "label";
+        }
+
+        input{
+            grid-area: "input";
+        }
+    }
+    input{
+        align-self: self-end;
     }
 }
