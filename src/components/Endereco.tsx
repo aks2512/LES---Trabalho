@@ -74,6 +74,7 @@ export function Endereco(props: endProps) {
     });
   }
   const renderIndex = () => {
+      console.log(props.index)
       if(typeof props.index !== undefined){
         return <div className="enderecos__form__index">Endereco - ({props.index})</div>
       }

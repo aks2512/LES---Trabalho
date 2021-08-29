@@ -24,7 +24,6 @@ export function DadosPessoais(props: cliProps) {
 
   useEffect(() => {
     props.callback(cliente);
-    console.log(cliente);
   }, [cliente]);
 
   function handleCliente(e: any) {
@@ -40,7 +39,7 @@ export function DadosPessoais(props: cliProps) {
   }
 
   const renderSenha = () => {
-    { console.log(props.formSenha)
+    { 
       if(props.formSenha){
       return <>
               <div className="labeled__input">

@@ -17,7 +17,7 @@ import { Context } from "../contexts/AuthContext";
 
 export function CadastroCliente() {
   const history = useHistory();
-  const { authenticated, user, handleLogout} = useContext(Context);
+  const {handleLogin} = useContext(Context);
   const [enderecos, setEnderecos] = useState([{}]);
   const [cliente, setCliente] = useState({
     cli_pnome:"",
@@ -53,6 +53,7 @@ export function CadastroCliente() {
   async function postCliente(e: FormEvent) {//Prepara e pede para API cadastrar o cliente no banco de dados
     e.preventDefault();
     let validaTipos = tiposExigidos;
+
     enderecos.forEach((item) => {
       if (item["end_tipo" as keyof typeof item] === "ambos") validaTipos = [];
       let tipoIndex = validaTipos.indexOf(
@@ -60,6 +61,7 @@ export function CadastroCliente() {
       );
       if (tipoIndex >= 0) validaTipos.splice(tipoIndex, 1);
     });
+
     if (Object.keys(validaTipos).length != 0) {
       let str = ""
       validaTipos.forEach((item)=>{
@@ -76,8 +78,9 @@ export function CadastroCliente() {
 
     let res = await api.post("/clientes/insert", cliente);
 
-    if(res.status==200){
-      redirect();
+    if(res.status==200&&!res.data.msgErr){
+      await handleLogin(cliente.cli_email, cliente.cli_senha);
+      history.push('/detalhesDaConta');
     }
   }
 
@@ -91,10 +94,6 @@ export function CadastroCliente() {
     var temp_end = enderecos;
     temp_end.pop();
     setEnderecos([...temp_end]);
-  }
-
-  const redirect = () => {
-    history.push('/your-path')
   }
 
   return (

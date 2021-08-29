@@ -1,8 +1,16 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Form } from '../components/Form';
-import { Endereco} from '../components/Endereco';
+import { Endereco } from '../components/Endereco';
+import { useState } from 'react';
+
 export function CadastroEndereco() {
+    const [endereco, setEndereco] = useState({});
+
+    function enderecosHandler(endereco: Object) {////Atualiza a lista de enderecos do formulario atráves do componente Endereco
+        setEndereco(endereco);
+    }
+
     return (
         <>
             <Header />
@@ -10,12 +18,12 @@ export function CadastroEndereco() {
                 <div className="container">
                     <Form 
                         submitFunction={() => console.log('teste')}
-                        title="Cadastrar endereço" 
+                        title="Editar endereço" 
                         about="Endereço"
-                        buttonText="Cadastrar"    
-                        modalMessage="Cadastrado com sucesso"  
+                        buttonText="Atualizar"    
+                        modalMessage="Atualizado com sucesso" 
                     >
-                    {/* <Endereco/> */}
+                        <Endereco callback={(end:Object)=>enderecosHandler(end)}/>
                     </Form>
                 </div>
             </main>

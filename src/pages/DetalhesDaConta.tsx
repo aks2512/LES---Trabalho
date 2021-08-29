@@ -30,6 +30,13 @@ export function DetalhesDaConta() {
         const request = await api.put("/clientes/update", cliente);
     }
 
+    async function getCliente(){
+        const res = await api.post("/clientes/readOne", {"type":"cliente","key":"cli_email","value":user.email});
+        console.log("res:"+res)
+    }
+
+    document.addEventListener('click',getCliente)
+
     return (
         <div>
             <Header />
