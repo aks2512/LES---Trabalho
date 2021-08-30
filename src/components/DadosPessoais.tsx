@@ -32,8 +32,6 @@ export function DadosPessoais(props: cliProps) {
   const { handleLogin } = useContext(Context);
   const [cliente, setCliente] = useState(props.preSet||ex_cliente);
 
-  console.log(props.preSet)
-
   useEffect(() => {
     props.callback(cliente);
   }, [cliente]);

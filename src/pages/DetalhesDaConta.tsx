@@ -1,6 +1,7 @@
 //Dependências
 import { useState, FormEvent, useContext } from "react";
 import { Link, Redirect, Route, useHistory } from "react-router-dom";
+import { useEffect } from "react";
 
 //Componentes
 import { Header } from "../components/Header";
@@ -16,21 +17,41 @@ import { Context } from "../contexts/AuthContext";
 //API
 import api from "../api";
 
+
 export function DetalhesDaConta() {
     const history = useHistory();
-    const { authenticated, user, handleLogout} = useContext(Context);
-    const [ cliente, setCliente] = useState({
-        cli_pnome:"",
-        cli_unome:"",
-        cli_rg:"",
-        cli_cpf:"",
-        cli_email:"",
-        cli_telefone:"",
-        cli_dtnascimento:"",
-        cli_ddd:"",
+    const { authenticated, user, handleLogout } = useContext(Context);
+    const [isLoading, setLoading] = useState(true);
+    const [cliente, setCliente] = useState({
+        cli_pnome: "",
+        cli_unome: "",
+        cli_rg: "",
+        cli_cpf: "",
+        cli_email: "",
+        cli_telefone: "",
+        cli_dtnascimento: "",
+        cli_ddd: "",
         cli_sexo: "Masculino",
+        enderecos:[{
+            end_id: "",
+            end_nome: "",
+            end_tipo: "",
+            end_tresidencia: "",
+            end_tlogradouro: "",
+            end_pais: "",
+            end_cep:  "",
+            end_numero: "",
+            end_logradouro: "",
+            end_complemento: "",
+            end_bairro: "",
+            end_cidade: "",
+            end_estado: ""}],
         type: "cliente"
-      });
+    });
+
+    useEffect(()=>{
+        getCliente()
+    },[])
 
     function clienteHandler(cliente: any) {
         setCliente(cliente);
@@ -41,9 +62,34 @@ export function DetalhesDaConta() {
         const request = await api.put("/clientes/update", cliente);
     }
 
-    async function getCliente(){
-        const  res = await api.post("/clientes/readOne", {"type":"cliente","key":"cli_email","value":user.email});
-        return res.data;
+
+    async function getCliente() {
+        const res = await api.post("/clientes/readId", { "type": "cliente", "key": "cli_id", "value": user.email });
+        setCliente(res.data)
+        console.log("teste",res.data)
+        setLoading(false)
+    }
+
+    if (isLoading) {
+        return  <div>
+                    <Header />
+                    <main>
+                        <div className="container">
+                            <div className="row justify-content-center align-items-center">
+                                <div className="col-12 col-lg-6 cliente__form__alterar">
+                                    <Form
+                                        submitFunction={()=>{alert("Aguarde o carregamento do seus dados...")}}
+                                        title="Detalhes da Conta"
+                                        buttonText="Aguarde..."
+                                        modalMessage="Atualizado com sucesso"
+                                    >
+                                        <p>Carregando dados da conta...</p>
+                                    </Form>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
     }
 
     return (
@@ -83,17 +129,20 @@ export function DetalhesDaConta() {
                                 new="Novo Endereço"
                                 newLink="/cadastroEndereco"
                             >
-                                <Card
-                                    editar="/editarEndereco"
-                                >
-                                    <h5>Endereço 1</h5>
-                                    <p><strong>Logradouro:</strong> xxxxxxxxxxxxx</p>
-                                    <p><strong>Numero:</strong> xxxx</p>
-                                    <p><strong>CEP:</strong> xxxx-xxxx</p>
-                                    <p><strong>Cidade:</strong> xxxxxxxx</p>
-                                    <p><strong>Bairro:</strong> xxxxxxxx</p>
-                                    <p><strong>Estado:</strong> xxxxxxxx</p>
-                                </Card>
+                                {cliente.enderecos.forEach((endereco)=>{
+                                    return  <Card
+                                                editar={"/editarEndereco?id="+endereco.end_id}
+                                            >
+                                                <h5>Endereço 1</h5>
+                                                <p><strong>Logradouro:</strong> {endereco.end_logradouro} </p>
+                                                <p><strong>Numero:</strong> {endereco.end_numero}</p>
+                                                <p><strong>CEP:</strong>    {endereco.end_cep}</p>
+                                                <p><strong>Cidade:</strong> {endereco.end_cidade}</p>
+                                                <p><strong>Bairro:</strong> {endereco.end_bairro}</p>
+                                                <p><strong>Estado:</strong> {endereco.end_estado}</p>
+                                            </Card>
+                                })}
+                               
                                 <Card
                                     editar="/editarEndereco"
                                 >
