@@ -33,27 +33,28 @@ export function DetalhesDaConta() {
         cli_dtnascimento: "",
         cli_ddd: "",
         cli_sexo: "Masculino",
-        enderecos:[{
+        enderecos: [{
             end_id: "",
             end_nome: "",
             end_tipo: "",
             end_tresidencia: "",
             end_tlogradouro: "",
             end_pais: "",
-            end_cep:  "",
+            end_cep: "",
             end_numero: "",
             end_logradouro: "",
             end_complemento: "",
             end_bairro: "",
             end_cidade: "",
-            end_estado: ""}],
+            end_estado: ""
+        }],
         type: "cliente"
     });
 
-    useEffect(()=>{
-        if(cliente.cli_email==="") getCliente()
+    useEffect(() => {
+        if (cliente.cli_email === "") getCliente()
         console.log(cliente)
-    },[cliente])
+    }, [cliente])
 
     function clienteHandler(cliente: any) {
         setCliente(cliente);
@@ -62,11 +63,16 @@ export function DetalhesDaConta() {
     async function updateCliente(e: FormEvent) {
         e.preventDefault();
 
+        let temp_clidt = cliente.cli_dtnascimento
+
         let date = new Date(cliente.cli_dtnascimento);
+
         cliente.cli_dtnascimento = moment(date).format()
         cliente.type = "cliente"
-    
+
         await api.put("/clientes/update", cliente);
+
+        cliente.cli_dtnascimento = temp_clidt
 
         history.push('/detalhesDaConta')
     }
@@ -79,45 +85,74 @@ export function DetalhesDaConta() {
     }
 
     const renderEndCards = () => {
-        if(!isLoading){
-            return cliente.enderecos.map((endereco,index)=>{
-                return  <Card
-                            editar={"/editarEndereco?id="+endereco.end_id}
-                        >
-                            <h5>Endereço 1</h5>
-                            <p><strong>Logradouro:</strong> {endereco.end_logradouro} </p>
-                            <p><strong>Numero:</strong> {endereco.end_numero}</p>
-                            <p><strong>CEP:</strong>    {endereco.end_cep}</p>
-                            <p><strong>Cidade:</strong> {endereco.end_cidade}</p>
-                            <p><strong>Bairro:</strong> {endereco.end_bairro}</p>
-                            <p><strong>Estado:</strong> {endereco.end_estado}</p>
-                        </Card>
+        if (!isLoading) {
+            return cliente.enderecos.map((endereco, index) => {
+                <>
+                    <Card editar={"/editarEndereco?id=" + endereco.end_id}>
+                        <h5>Endereço 1</h5>
+                        <p><strong>Logradouro:</strong> {endereco.end_logradouro} </p>
+                        <p><strong>Numero:</strong> {endereco.end_numero}</p>
+                        <p><strong>CEP:</strong>    {endereco.end_cep}</p>
+                        <p><strong>Cidade:</strong> {endereco.end_cidade}</p>
+                        <p><strong>Bairro:</strong> {endereco.end_bairro}</p>
+                        <p><strong>Estado:</strong> {endereco.end_estado}</p>
+                    </Card>
+                </>
             })
         }
         return <Card editar="">Carregando Enderecos...</Card>
     }
 
+    /*     const renderSenha = () => {
+            {
+              if (props.formSenha) {
+                return <>
+                  <div className="labeled__input">
+                    <label htmlFor="cli_senha">Senha</label>
+                    <input
+                      name="cli_senha"
+                      onChange={(e) => handleCliente(e)}
+                      type="password"
+                      placeholder="Senha"
+                      className="senha"
+                      required />
+                  </div>
+                  <div className="labeled__input">
+                    <label htmlFor="cli_confsenha">Confirme a senha</label>
+                    <input
+                      name="cli_confsenha"
+                      onChange={(e) => handleCliente(e)}
+                      type="password"
+                      placeholder="Confirmar Senha"
+                      className="confsenha"
+                      required />
+                  </div>
+                </>
+              }
+            }
+          } */
+
 
     if (isLoading) {
-        return  <div>
-                    <Header />
-                    <main>
-                        <div className="container">
-                            <div className="row justify-content-center align-items-center">
-                                <div className="col-12 col-lg-6 cliente__form__alterar">
-                                    <Form
-                                        submitFunction={()=>{alert("Aguarde o carregamento do seus dados...")}}
-                                        title="Detalhes da Conta"
-                                        buttonText="Aguarde..."
-                                        modalMessage="Atualizado com sucesso"
-                                    >
-                                        <p>Carregando dados da conta...</p>
-                                    </Form>
-                                </div>
-                            </div>
+        return <div>
+            <Header />
+            <main>
+                <div className="container">
+                    <div className="row justify-content-center align-items-center">
+                        <div className="col-12 col-lg-6 cliente__form__alterar">
+                            <Form
+                                submitFunction={() => { alert("Aguarde o carregamento do seus dados...") }}
+                                title="Detalhes da Conta"
+                                buttonText="Aguarde..."
+                                modalMessage="Atualizado com sucesso"
+                            >
+                                <p>Carregando dados da conta...</p>
+                            </Form>
                         </div>
-                    </main>
+                    </div>
                 </div>
+            </main>
+        </div>
     }
 
     return (
@@ -157,18 +192,7 @@ export function DetalhesDaConta() {
                                 new="Novo Endereço"
                                 newLink="/cadastroEndereco"
                             >
-                                <Card
-                                    editar="/editarEndereco"
-                                >
-                                    {renderEndCards}
-                                    <h5>Endereço 1</h5>
-                                    <p><strong>Logradouro:</strong> xxxxxxxxxxxxx</p>
-                                    <p><strong>Numero:</strong> xxxx</p>
-                                    <p><strong>CEP:</strong> xxxx-xxxx</p>
-                                    <p><strong>Cidade:</strong> xxxxxxxx</p>
-                                    <p><strong>Bairro:</strong> xxxxxxxx</p>
-                                    <p><strong>Estado:</strong> xxxxxxxx</p>
-                                </Card>
+                                {renderEndCards()}
                             </Cards>
                             <Cards
                                 title="Cartões"
