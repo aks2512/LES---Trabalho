@@ -24,6 +24,7 @@ export function DetalhesDaConta() {
     const { authenticated, user, handleLogout } = useContext(Context);
     const [isLoading, setLoading] = useState(true);
     const [cliente, setCliente] = useState({
+        id:1,
         cli_pnome: "",
         cli_unome: "",
         cli_rg: "",
@@ -70,6 +71,9 @@ export function DetalhesDaConta() {
         cliente.cli_dtnascimento = moment(date).format()
         cliente.type = "cliente"
 
+        console.log(user.email)
+        cliente.id = user.email
+
         await api.put("/clientes/update", cliente);
 
         cliente.cli_dtnascimento = temp_clidt
@@ -79,6 +83,7 @@ export function DetalhesDaConta() {
 
 
     async function getCliente() {
+        console.log(user)
         const res = await api.post("/clientes/readId", { "type": "cliente", "key": "cli_id", "value": user.email });
         setCliente(res.data[0])//api sempre retorna os dados em forma de vetor - só precisamos da primeira posição deste
         setLoading(false)
@@ -88,7 +93,7 @@ export function DetalhesDaConta() {
         if (!isLoading) {
             return cliente.enderecos.map((endereco, index) => {
                 return <>
-                    <Card editar={"/editarEndereco?id=" + endereco.end_id}>
+                    <Card key={index} editar={"/editarEndereco"}>
                         <h5>Endereço 1</h5>
                         <p><strong>Logradouro:</strong> {endereco.end_logradouro} </p>
                         <p><strong>Numero:</strong> {endereco.end_numero}</p>
