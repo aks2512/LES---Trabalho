@@ -87,7 +87,7 @@ export function DetalhesDaConta() {
     const renderEndCards = () => {
         if (!isLoading) {
             return cliente.enderecos.map((endereco, index) => {
-                <>
+                return <>
                     <Card editar={"/editarEndereco?id=" + endereco.end_id}>
                         <h5>Endereço 1</h5>
                         <p><strong>Logradouro:</strong> {endereco.end_logradouro} </p>
@@ -99,8 +99,9 @@ export function DetalhesDaConta() {
                     </Card>
                 </>
             })
+        }else{
+            return <Card editar="">Carregando Enderecos...</Card>
         }
-        return <Card editar="">Carregando Enderecos...</Card>
     }
 
     /*     const renderSenha = () => {
