@@ -50,8 +50,9 @@ export function DetalhesDaConta() {
     });
 
     useEffect(()=>{
-        getCliente()
-    },[])
+        if(cliente.cli_email==="") getCliente()
+        console.log(cliente)
+    },[cliente])
 
     function clienteHandler(cliente: any) {
         setCliente(cliente);
@@ -65,7 +66,7 @@ export function DetalhesDaConta() {
 
     async function getCliente() {
         const res = await api.post("/clientes/readId", { "type": "cliente", "key": "cli_id", "value": user.email });
-        setCliente(res.data)
+        setCliente(res.data[0])
         setLoading(false)
     }
 
@@ -85,6 +86,8 @@ export function DetalhesDaConta() {
                         </Card>
             })
         }
+
+        return <Card editar="">Carregando Enderecos...</Card>
     }
 
     if (isLoading) {
@@ -149,6 +152,7 @@ export function DetalhesDaConta() {
                                 <Card
                                     editar="/editarEndereco"
                                 >
+                                    {renderEndCards}
                                     <h5>Endereço 1</h5>
                                     <p><strong>Logradouro:</strong> xxxxxxxxxxxxx</p>
                                     <p><strong>Numero:</strong> xxxx</p>
