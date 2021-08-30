@@ -66,8 +66,25 @@ export function DetalhesDaConta() {
     async function getCliente() {
         const res = await api.post("/clientes/readId", { "type": "cliente", "key": "cli_id", "value": user.email });
         setCliente(res.data)
-        console.log("teste",res.data)
         setLoading(false)
+    }
+
+    const renderEndCards = () => {
+        if(!isLoading){
+            return cliente.enderecos.forEach((endereco)=>{
+                return  <Card
+                            editar={"/editarEndereco?id="+endereco.end_id}
+                        >
+                            <h5>Endereço 1</h5>
+                            <p><strong>Logradouro:</strong> {endereco.end_logradouro} </p>
+                            <p><strong>Numero:</strong> {endereco.end_numero}</p>
+                            <p><strong>CEP:</strong>    {endereco.end_cep}</p>
+                            <p><strong>Cidade:</strong> {endereco.end_cidade}</p>
+                            <p><strong>Bairro:</strong> {endereco.end_bairro}</p>
+                            <p><strong>Estado:</strong> {endereco.end_estado}</p>
+                        </Card>
+            })
+        }
     }
 
     if (isLoading) {
@@ -129,20 +146,6 @@ export function DetalhesDaConta() {
                                 new="Novo Endereço"
                                 newLink="/cadastroEndereco"
                             >
-                                {cliente.enderecos.forEach((endereco)=>{
-                                    return  <Card
-                                                editar={"/editarEndereco?id="+endereco.end_id}
-                                            >
-                                                <h5>Endereço 1</h5>
-                                                <p><strong>Logradouro:</strong> {endereco.end_logradouro} </p>
-                                                <p><strong>Numero:</strong> {endereco.end_numero}</p>
-                                                <p><strong>CEP:</strong>    {endereco.end_cep}</p>
-                                                <p><strong>Cidade:</strong> {endereco.end_cidade}</p>
-                                                <p><strong>Bairro:</strong> {endereco.end_bairro}</p>
-                                                <p><strong>Estado:</strong> {endereco.end_estado}</p>
-                                            </Card>
-                                })}
-                               
                                 <Card
                                     editar="/editarEndereco"
                                 >
