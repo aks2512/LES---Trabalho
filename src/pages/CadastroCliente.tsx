@@ -1,7 +1,7 @@
 //Dependências
 import { useState, FormEvent, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-
+import moment from 'moment'
 //Componentes
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
@@ -75,6 +75,9 @@ export function CadastroCliente() {
     }
 
     cliente.enderecos = enderecos
+
+    let date = new Date(cliente.cli_dtnascimento);
+    cliente.cli_dtnascimento = moment(date).format()
 
     let res = await api.post("/clientes/insert", cliente);
 

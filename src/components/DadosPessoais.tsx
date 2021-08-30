@@ -2,7 +2,6 @@
 import { useContext, useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Context } from "../contexts/AuthContext";
-import moment from 'moment'
 
 //CSS/SCSS
 import "../styles/dadosPessoais.scss";
@@ -38,10 +37,6 @@ export function DadosPessoais(props: cliProps) {
 
   function handleCliente(e: any) {
     let value = e.target.value;
-    if (e.target.name === "cli_dtnascimento") {
-      let date = new Date(value);
-      value = moment(date).format()
-    }
     console.log(value)
     setCliente({
       ...cliente,
@@ -90,7 +85,7 @@ export function DadosPessoais(props: cliProps) {
           placeholder="Primeiro Nome"
           required />
         <input
-        value={cliente.cli_unome}
+          value={cliente.cli_unome}
           name="cli_unome"
           onChange={(e) => handleCliente(e)}
           type="text"
@@ -101,10 +96,11 @@ export function DadosPessoais(props: cliProps) {
         <div className="labeled__input">
           <label htmlFor="cli_dtnascimento">Data de nascimento</label>
           <input
+            value={cliente.cli_dtnascimento}
             name="cli_dtnascimento"
             onChange={(e) => handleCliente(e)}
             type="date"
-            placeholder="0000-00-00"
+            placeholder="00/00/0000"
             required />
         </div>
         <div className="labeled__input">

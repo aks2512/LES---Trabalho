@@ -2,6 +2,7 @@
 import { useState, FormEvent, useContext } from "react";
 import { Link, Redirect, Route, useHistory } from "react-router-dom";
 import { useEffect } from "react";
+import moment from 'moment'
 
 //Componentes
 import { Header } from "../components/Header";
@@ -60,19 +61,26 @@ export function DetalhesDaConta() {
 
     async function updateCliente(e: FormEvent) {
         e.preventDefault();
-        const request = await api.put("/clientes/update", cliente);
+
+        let date = new Date(cliente.cli_dtnascimento);
+        cliente.cli_dtnascimento = moment(date).format()
+        cliente.type = "cliente"
+    
+        await api.put("/clientes/update", cliente);
+
+        history.push('/detalhesDaConta')
     }
 
 
     async function getCliente() {
         const res = await api.post("/clientes/readId", { "type": "cliente", "key": "cli_id", "value": user.email });
-        setCliente(res.data[0])
+        setCliente(res.data[0])//api sempre retorna os dados em forma de vetor - só precisamos da primeira posição deste
         setLoading(false)
     }
 
     const renderEndCards = () => {
         if(!isLoading){
-            return cliente.enderecos.forEach((endereco)=>{
+            return cliente.enderecos.map((endereco,index)=>{
                 return  <Card
                             editar={"/editarEndereco?id="+endereco.end_id}
                         >
@@ -86,9 +94,9 @@ export function DetalhesDaConta() {
                         </Card>
             })
         }
-
         return <Card editar="">Carregando Enderecos...</Card>
     }
+
 
     if (isLoading) {
         return  <div>
