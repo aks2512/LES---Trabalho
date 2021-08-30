@@ -7,20 +7,32 @@ import moment from 'moment'
 //CSS/SCSS
 import "../styles/dadosPessoais.scss";
 
+const ex_cliente = {
+  cli_pnome:"",
+  cli_unome:"",
+  cli_rg:"",
+  cli_cpf:"",
+  cli_email:"",
+  cli_telefone:"",
+  cli_dtnascimento:"",
+  cli_ddd:"",
+  cli_sexo: "Masculino",
+  type: "cliente"
+}
+
 type cliProps = {
   callback: Function;
-  formSenha:boolean
+  formSenha: boolean;
+  preSet?: typeof ex_cliente
 };
 
 export function DadosPessoais(props: cliProps) {
+  
   const history = useHistory();
   const { handleLogin } = useContext(Context);
-  const [cliente, setCliente] = useState({
-    cli_senha: "",
-    cli_confsenha: "",
-    cli_sexo: "Masculino",
-    type: "cliente"
-  });
+  const [cliente, setCliente] = useState(props.preSet||ex_cliente);
+
+  console.log(props.preSet)
 
   useEffect(() => {
     props.callback(cliente);
@@ -39,31 +51,32 @@ export function DadosPessoais(props: cliProps) {
   }
 
   const renderSenha = () => {
-    { 
-      if(props.formSenha){
-      return <>
-              <div className="labeled__input">
-                <label htmlFor="cli_senha">Senha</label>
-                <input
-                  name="cli_senha"
-                  onChange={(e) => handleCliente(e)}
-                  type="password"
-                  placeholder="Senha"
-                  className="senha"
-                required/>
-              </div>
-              <div className="labeled__input">
-                <label htmlFor="cli_confsenha">Confirme a senha</label>
-                <input
-                  name="cli_confsenha"
-                  onChange={(e) => handleCliente(e)}
-                  type="password"
-                  placeholder="Confirmar Senha"
-                  className="confsenha"
-                required/>
-              </div>
-            </>
-    }}
+    {
+      if (props.formSenha) {
+        return <>
+          <div className="labeled__input">
+            <label htmlFor="cli_senha">Senha</label>
+            <input
+              name="cli_senha"
+              onChange={(e) => handleCliente(e)}
+              type="password"
+              placeholder="Senha"
+              className="senha"
+              required />
+          </div>
+          <div className="labeled__input">
+            <label htmlFor="cli_confsenha">Confirme a senha</label>
+            <input
+              name="cli_confsenha"
+              onChange={(e) => handleCliente(e)}
+              type="password"
+              placeholder="Confirmar Senha"
+              className="confsenha"
+              required />
+          </div>
+        </>
+      }
+    }
   }
 
   return (
@@ -71,45 +84,50 @@ export function DadosPessoais(props: cliProps) {
       <label>Seu Nome</label>
       <div className="dados__pessoais__nome">
         <input
+          value={cliente.cli_pnome}
           name="cli_pnome"
           onChange={(e) => handleCliente(e)}
           type="text"
           placeholder="Primeiro Nome"
-        required/>
+          required />
         <input
+        value={cliente.cli_unome}
           name="cli_unome"
           onChange={(e) => handleCliente(e)}
           type="text"
           placeholder="Ultimo Nome"
-        required/>
+          required />
       </div>
       <div className="dados__pessoais__pessoa">
         <div className="labeled__input">
           <label htmlFor="cli_dtnascimento">Data de nascimento</label>
           <input
+            value={cliente.cli_dtnascimento}
             name="cli_dtnascimento"
             onChange={(e) => handleCliente(e)}
             type="date"
             placeholder="0000-00-00"
-          required/>
+            required />
         </div>
         <div className="labeled__input">
           <label htmlFor="cli_rg">RG</label>
           <input
+            value={cliente.cli_rg}
             name="cli_rg"
             onChange={(e) => handleCliente(e)}
             type="text"
             placeholder="RG"
-          required/>
+            required />
         </div>
         <div className="labeled__input">
           <label htmlFor="cli_cpf">CPF</label>
           <input
+            value={cliente.cli_cpf}
             name="cli_cpf"
             onChange={(e) => handleCliente(e)}
             type="text"
             placeholder="CPF"
-          required/>
+            required />
         </div>
         <div className="labeled__input">
           <label htmlFor="cli_sexo">Sexo</label>
@@ -133,7 +151,8 @@ export function DadosPessoais(props: cliProps) {
             onChange={(e) => handleCliente(e)}
             type="email"
             placeholder="Email"
-          required/>
+            value={cliente.cli_email}
+            required />
         </div>
       </div>
       <div className="dados__pessoais__telefone">
@@ -144,7 +163,8 @@ export function DadosPessoais(props: cliProps) {
             onChange={(e) => handleCliente(e)}
             type="number"
             placeholder="DDD"
-          required/>
+            value={cliente.cli_ddd}
+            required />
         </div>
         <div className="labeled__input">
           <label htmlFor="cli_telefone">Seu numero de telefone</label>
@@ -153,7 +173,8 @@ export function DadosPessoais(props: cliProps) {
             onChange={(e) => handleCliente(e)}
             type="number"
             placeholder="Telefone"
-          required/>
+            value={cliente.cli_telefone}
+            required />
         </div>
       </div>
       <div className="dados__pessoais__usuario">

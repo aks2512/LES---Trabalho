@@ -19,9 +19,20 @@ import api from "../api";
 export function DetalhesDaConta() {
     const history = useHistory();
     const { authenticated, user, handleLogout} = useContext(Context);
-    const [ cliente, setCliente] = useState({});
+    const [ cliente, setCliente] = useState({
+        cli_pnome:"",
+        cli_unome:"",
+        cli_rg:"",
+        cli_cpf:"",
+        cli_email:"",
+        cli_telefone:"",
+        cli_dtnascimento:"",
+        cli_ddd:"",
+        cli_sexo: "Masculino",
+        type: "cliente"
+      });
 
-    function clienteHandler(cliente: Object) {
+    function clienteHandler(cliente: any) {
         setCliente(cliente);
     }
 
@@ -31,11 +42,9 @@ export function DetalhesDaConta() {
     }
 
     async function getCliente(){
-        const res = await api.post("/clientes/readOne", {"type":"cliente","key":"cli_email","value":user.email});
-        console.log("res:"+res)
+        const  res = await api.post("/clientes/readOne", {"type":"cliente","key":"cli_email","value":user.email});
+        return res.data;
     }
-
-    document.addEventListener('click',getCliente)
 
     return (
         <div>
@@ -59,6 +68,7 @@ export function DetalhesDaConta() {
                                         clienteHandler(e);
                                     }}
                                     formSenha={false}
+                                    preSet={cliente}
                                 />
 
                                 <div className="link2">
