@@ -98,7 +98,7 @@ export function Endereco(props: endProps) {
           placeholder="Nome do Endereco"
           value={endereco.end_nome}
           onChange={(e: any) => handleEndereco(e)}
-        />
+          required/>
         <div className="enderecos__form__tipos">
           <div className="labeled__input">
             <label htmlFor="end_tipo">Tipo de Endereço</label>
@@ -120,7 +120,7 @@ export function Endereco(props: endProps) {
             placeholder="CEP"
             onChange={(e: any) => handleEndereco(e)}
             value={endereco.end_cep}
-          />
+            required/>
         </div>
         <div className="enderecos__form__outros">
           <div className="labeled__input">
@@ -135,21 +135,21 @@ export function Endereco(props: endProps) {
             placeholder="Estado"
             onChange={(e: any) => handleEndereco(e)}
             value={endereco.end_estado}
-          />
+            required/>
           <input
             type="text"
             name="end_cidade"
             placeholder="Cidade"
             onChange={(e: any) => handleEndereco(e)}
             value={endereco.end_cidade}
-          />
+            required/>
           <input
             type="text"
             name="end_bairro"
             placeholder="Bairro"
             onChange={(e: any) => handleEndereco(e)}
             value={endereco.end_bairro}
-          />
+            required/>
         </div>
         <div className="enderecos__form__detalhesRua">
           <input
@@ -157,7 +157,7 @@ export function Endereco(props: endProps) {
             name="end_logradouro"
             placeholder="Logradouro"
             onChange={(e: any) => handleEndereco(e)}
-          />
+            required/>
           <select name='end_tlogradouro' onChange={(e:any)=>{handleEndereco(e)}}>
               {renderSelect(tlogradouroOpts)}
           </select>

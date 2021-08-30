@@ -42,6 +42,7 @@ export function DadosPessoais(props: cliProps) {
       let date = new Date(value);
       value = moment(date).format()
     }
+    console.log(value)
     setCliente({
       ...cliente,
       [e.target.name]: value
@@ -100,7 +101,6 @@ export function DadosPessoais(props: cliProps) {
         <div className="labeled__input">
           <label htmlFor="cli_dtnascimento">Data de nascimento</label>
           <input
-            value={cliente.cli_dtnascimento}
             name="cli_dtnascimento"
             onChange={(e) => handleCliente(e)}
             type="date"
