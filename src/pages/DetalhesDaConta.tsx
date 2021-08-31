@@ -49,6 +49,13 @@ export function DetalhesDaConta() {
             end_cidade: "",
             end_estado: ""
         }],
+        cartoes:[{
+            car_id:"",
+            car_numero:"",
+            car_bandeira:"",
+            car_nome:"",
+            car_validade:""
+        }],
         type: "cliente"
     });
 
@@ -106,6 +113,23 @@ export function DetalhesDaConta() {
             })
         }else{
             return <Card editar="">Carregando Enderecos...</Card>
+        }
+    }
+
+    const renderCarCards = () => {
+        if (!isLoading&&cliente.cartoes) {
+            return cliente.cartoes.map((cartao, index) => {
+                return <>
+                    <Card key={"car_"+index} editar={"/editarCartao"}>
+                            <h5>Cartão {cartao.car_id}</h5>
+                            <p><strong>Numero:</strong>{cartao.car_numero}</p>
+                            <p><strong>Nome:</strong>{cartao.car_numero}</p>
+                            <p><strong>Validade:</strong>{cartao.car_validade}</p>
+                    </Card>
+                </>
+            })
+        }else{
+            if(isLoading) return <Card editar="">Carregando Cartões...</Card>
         }
     }
 
@@ -175,24 +199,7 @@ export function DetalhesDaConta() {
                                 new="Novo Cartão"
                                 newLink="/cadastroCartao"
                             >
-                                <Card
-                                    editar="/editarCartao"
-                                >
-                                    <h5>Cartão 1</h5>
-                                    <p><strong>Numero:</strong> xxxxxxxxxxxxx</p>
-                                    <p><strong>Nome:</strong> xxxx</p>
-                                    <p><strong>Expiração:</strong> xxxx-xxxx</p>
-                                    <p><strong>Codigo:</strong> xxxxxxxx</p>
-                                </Card>
-                                <Card
-                                    editar="/editarCartao"
-                                >
-                                    <h5>Cartão 1</h5>
-                                    <p><strong>Numero:</strong> xxxxxxxxxxxxx</p>
-                                    <p><strong>Nome:</strong> xxxx</p>
-                                    <p><strong>Expiração:</strong> xxxx-xxxx</p>
-                                    <p><strong>Codigo:</strong> xxxxxxxx</p>
-                                </Card>
+                                {renderCarCards()}
                             </Cards>
                         </div>
                     </div>

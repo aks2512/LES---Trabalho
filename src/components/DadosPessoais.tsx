@@ -37,7 +37,6 @@ export function DadosPessoais(props: cliProps) {
 
   function handleCliente(e: any) {
     let value = e.target.value;
-    console.log(value)
     setCliente({
       ...cliente,
       [e.target.name]: value
