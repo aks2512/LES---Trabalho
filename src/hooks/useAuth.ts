@@ -28,7 +28,7 @@ export default function useAuth() {
       "cli_senha" : password,
       "type"  : "cliente"
     }));
-    console.log(userDB)
+
     if (userDB.data.result && userDB.data.token) {
       localStorage.setItem('token', userDB.data.token);
       localStorage.setItem('username', userDB.data.result.cli_pnome)

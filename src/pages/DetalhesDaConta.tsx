@@ -83,8 +83,8 @@ export function DetalhesDaConta() {
 
 
     async function getCliente() {
-        console.log(user)
-        const res = await api.post("/clientes/readId", { "type": "cliente", "key": "cli_id", "value": user.email });
+        console.log("user",user)
+        const res = await api.post("/clientes/readId", { "type": "cliente" });
         setCliente(res.data[0])//api sempre retorna os dados em forma de vetor - só precisamos da primeira posição deste
         setLoading(false)
     }
@@ -93,8 +93,8 @@ export function DetalhesDaConta() {
         if (!isLoading) {
             return cliente.enderecos.map((endereco, index) => {
                 return <>
-                    <Card key={index} editar={"/editarEndereco"}>
-                        <h5>Endereço 1</h5>
+                    <Card key={"end_"+index} editar={"/editarEndereco"}>
+                        <h5>{endereco.end_nome}</h5>
                         <p><strong>Logradouro:</strong> {endereco.end_logradouro} </p>
                         <p><strong>Numero:</strong> {endereco.end_numero}</p>
                         <p><strong>CEP:</strong>    {endereco.end_cep}</p>
@@ -108,36 +108,6 @@ export function DetalhesDaConta() {
             return <Card editar="">Carregando Enderecos...</Card>
         }
     }
-
-    /*     const renderSenha = () => {
-            {
-              if (props.formSenha) {
-                return <>
-                  <div className="labeled__input">
-                    <label htmlFor="cli_senha">Senha</label>
-                    <input
-                      name="cli_senha"
-                      onChange={(e) => handleCliente(e)}
-                      type="password"
-                      placeholder="Senha"
-                      className="senha"
-                      required />
-                  </div>
-                  <div className="labeled__input">
-                    <label htmlFor="cli_confsenha">Confirme a senha</label>
-                    <input
-                      name="cli_confsenha"
-                      onChange={(e) => handleCliente(e)}
-                      type="password"
-                      placeholder="Confirmar Senha"
-                      className="confsenha"
-                      required />
-                  </div>
-                </>
-              }
-            }
-          } */
-
 
     if (isLoading) {
         return <div>

@@ -61,7 +61,7 @@ export function CadastroCliente() {
       );
       if (tipoIndex >= 0) validaTipos.splice(tipoIndex, 1);
     });
-
+    console.log(validaTipos)
     if (Object.keys(validaTipos).length != 0) {
       let str = ""
       validaTipos.forEach((item)=>{
@@ -77,9 +77,13 @@ export function CadastroCliente() {
     cliente.enderecos = enderecos
 
     let date = new Date(cliente.cli_dtnascimento);
+    let tempData = cliente.cli_dtnascimento;
+
     cliente.cli_dtnascimento = moment(date).format()
 
     let res = await api.post("/clientes/insert", cliente);
+
+    cliente.cli_dtnascimento = tempData
 
     if(res.status==200&&!res.data.msgErr){
       await handleLogin(cliente.cli_email, cliente.cli_senha);
