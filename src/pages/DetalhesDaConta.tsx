@@ -1,6 +1,6 @@
 //Dependências
 import { useState, FormEvent, useContext } from "react";
-import { Link, Redirect, Route, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import moment from 'moment'
 
@@ -21,7 +21,7 @@ import api from "../api";
 
 export function DetalhesDaConta() {
     const history = useHistory();
-    const { authenticated, user, handleLogout } = useContext(Context);
+    const { user } = useContext(Context);
     const [isLoading, setLoading] = useState(true);
     const [cliente, setCliente] = useState({
         id:1,
@@ -78,7 +78,6 @@ export function DetalhesDaConta() {
         cliente.cli_dtnascimento = moment(date).format()
         cliente.type = "cliente"
 
-        console.log(user.email)
         cliente.id = user.email
 
         await api.put("/clientes/update", cliente);

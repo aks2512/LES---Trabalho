@@ -1,7 +1,8 @@
 //Dependências
 import { useState, FormEvent, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import moment from 'moment'
+import moment from 'moment';
+
 //Componentes
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
@@ -62,7 +63,7 @@ export function CadastroCliente() {
       if (tipoIndex >= 0) validaTipos.splice(tipoIndex, 1);
     });
     console.log(validaTipos)
-    if (Object.keys(validaTipos).length != 0) {
+    if (Object.keys(validaTipos).length !== 0) {
       let str = ""
       validaTipos.forEach((item)=>{
         str += "\n"+item
@@ -85,7 +86,7 @@ export function CadastroCliente() {
 
     cliente.cli_dtnascimento = tempData
 
-    if(res.status==200&&!res.data.msgErr){
+    if(res.status === 200 && !res.data.msgErr){
       await handleLogin(cliente.cli_email, cliente.cli_senha);
       history.push('/detalhesDaConta');
     }

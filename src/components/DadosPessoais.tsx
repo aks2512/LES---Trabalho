@@ -1,7 +1,5 @@
 //Dependências
-import { useContext, useState, FormEvent, ChangeEvent, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { Context } from "../contexts/AuthContext";
+import { useState, useEffect } from "react";
 
 //CSS/SCSS
 import "../styles/dadosPessoais.scss";
@@ -27,14 +25,13 @@ type cliProps = {
 
 export function DadosPessoais(props: cliProps) {
   
-  const history = useHistory();
-  const { handleLogin } = useContext(Context);
   const [cliente, setCliente] = useState(props.preSet||ex_cliente);
 
   useEffect(() => {
     props.callback(cliente);
   }, [cliente]);
 
+  //Seta os dados do cliente
   function handleCliente(e: any) {
     let value = e.target.value;
     setCliente({
@@ -43,6 +40,7 @@ export function DadosPessoais(props: cliProps) {
     });
   }
 
+  //Renderiza os campos de senha
   const renderSenha = () => {
     {
       if (props.formSenha) {

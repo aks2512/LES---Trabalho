@@ -1,7 +1,5 @@
 import "../styles/enderecosForm.scss";
-import api from "../api";
-import { useHistory } from "react-router-dom";
-import { FormEvent, useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 
 type endProps = {
   index?: number;
@@ -23,7 +21,6 @@ type endProps = {
 };
 
 export function Endereco(props: endProps) {
-  const history = useHistory();
 
   const tresidenciaOpts = [
     {valor:"casa",texto:"Casa"},
@@ -64,22 +61,25 @@ export function Endereco(props: endProps) {
 
   useEffect(() => {
     props.callback(endereco, props.index);
-  }, [endereco]);
+  }, [endereco, props.index]);
 
-  function handleEndereco(e: ChangeEvent<HTMLInputElement>) {
+  //Seta os valores de enderecos
+  function handleEndereco(e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value;
     setEndereco({
       ...endereco,
       [e.target.name]: value
     });
   }
+
+  //Seta o id dos enderecos do formulario
   const renderIndex = () => {
-      console.log(props.index)
       if(typeof props.index !== undefined){
         return <div className="enderecos__form__index">Endereco - ({props.index})</div>
       }
   }
 
+  //Renderiza os options setados nas variaveis
   const renderSelect = (opcoes:{valor:string,texto:string}[]) => {
     return opcoes.map((item,key)=>{
         return <option value={item.valor}>{item.texto}</option>
@@ -97,18 +97,18 @@ export function Endereco(props: endProps) {
           className="enderecos__form__titulo"
           placeholder="Nome do Endereco"
           value={endereco.end_nome}
-          onChange={(e: any) => handleEndereco(e)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleEndereco(e)}
           required/>
         <div className="enderecos__form__tipos">
           <div className="labeled__input">
             <label htmlFor="end_tipo">Tipo de Endereço</label>
-            <select name='end_tipo' onChange={(e:any)=>{handleEndereco(e)}}>
+            <select name='end_tipo' onChange={(e:ChangeEvent<HTMLSelectElement>)=>{handleEndereco(e)}}>
               {renderSelect(tipoOpts)}
             </select>
           </div>
           <div className="labeled__input">
             <label htmlFor="end_tresidencia">Tipo de Residência</label>
-            <select name='end_tresidencia' onChange={(e:any)=>{handleEndereco(e)}}>
+            <select name='end_tresidencia' onChange={(e:ChangeEvent<HTMLSelectElement>)=>{handleEndereco(e)}}>
               {renderSelect(tresidenciaOpts)}
             </select>
           </div>
@@ -118,14 +118,14 @@ export function Endereco(props: endProps) {
             type="text"
             name="end_cep"
             placeholder="CEP"
-            onChange={(e: any) => handleEndereco(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleEndereco(e)}
             value={endereco.end_cep}
             required/>
         </div>
         <div className="enderecos__form__outros">
           <div className="labeled__input">
             <label htmlFor="end_pais">País</label>
-            <select name='end_pais' onChange={(e:any)=>{handleEndereco(e)}}>
+            <select name='end_pais' onChange={(e:ChangeEvent<HTMLSelectElement>)=>{handleEndereco(e)}}>
               {renderSelect(paisOpts)}
             </select>
           </div>
@@ -133,21 +133,21 @@ export function Endereco(props: endProps) {
             type="text"
             name="end_estado"
             placeholder="Estado"
-            onChange={(e: any) => handleEndereco(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleEndereco(e)}
             value={endereco.end_estado}
             required/>
           <input
             type="text"
             name="end_cidade"
             placeholder="Cidade"
-            onChange={(e: any) => handleEndereco(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleEndereco(e)}
             value={endereco.end_cidade}
             required/>
           <input
             type="text"
             name="end_bairro"
             placeholder="Bairro"
-            onChange={(e: any) => handleEndereco(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleEndereco(e)}
             value={endereco.end_bairro}
             required/>
         </div>
@@ -156,22 +156,22 @@ export function Endereco(props: endProps) {
             type="text"
             name="end_logradouro"
             placeholder="Logradouro"
-            onChange={(e: any) => handleEndereco(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleEndereco(e)}
             required/>
-          <select name='end_tlogradouro' onChange={(e:any)=>{handleEndereco(e)}}>
+          <select name='end_tlogradouro' onChange={(e:ChangeEvent<HTMLSelectElement>)=>{handleEndereco(e)}}>
               {renderSelect(tlogradouroOpts)}
           </select>
           <input
             type="number"
             name="end_numero"
             placeholder="Numero"
-            onChange={(e: any) => handleEndereco(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleEndereco(e)}
           />
           <input
             type="text"
             name="end_complemento"
             placeholder="Complemento"
-            onChange={(e: any) => handleEndereco(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleEndereco(e)}
           />
         </div>
         <div className="enderecos__form__complemento">
@@ -179,7 +179,7 @@ export function Endereco(props: endProps) {
             type="textarea"
             name="end_observacao"
             placeholder="Observacao"
-            onChange={(e: any) => handleEndereco(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleEndereco(e)}
           />
         </div>
       </div>

@@ -24,9 +24,9 @@ type endProps = {
   };
 
 export function EditarEndereco() {
-    const [endereco, setEndereco] = useState({});
+    const [endereco, setEndereco] = useState<endProps>();
 
-    function enderecosHandler(endereco: Object) {////Atualiza a lista de enderecos do formulario atráves do componente Endereco
+    function enderecosHandler(endereco: endProps) {////Atualiza a lista de enderecos do formulario atráves do componente Endereco
         setEndereco(endereco);
     }
 
@@ -42,7 +42,7 @@ export function EditarEndereco() {
                         buttonText="Atualizar"    
                         modalMessage="Atualizado com sucesso" 
                     >
-                        <Endereco callback={(end:Object)=>enderecosHandler(end)}/>
+                        <Endereco callback={(end:endProps)=>enderecosHandler(end)}/>
                     </Form>
                 </div>
             </main>
