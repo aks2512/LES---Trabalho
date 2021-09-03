@@ -61,8 +61,7 @@ export function DetalhesDaConta() {
 
     useEffect(() => {
         if (cliente.cli_email === "") getCliente()
-        console.log(cliente)
-    }, [cliente])
+    }, [cliente, getCliente])
 
     function clienteHandler(cliente: any) {
         setCliente(cliente);

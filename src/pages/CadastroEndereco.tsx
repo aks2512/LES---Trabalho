@@ -1,8 +1,9 @@
+import { useState } from 'react';
+
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Form } from '../components/Form';
 import { Endereco } from '../components/Endereco';
-import { useState } from 'react';
 
 export function CadastroEndereco() {
     const [endereco, setEndereco] = useState({});
@@ -10,6 +11,9 @@ export function CadastroEndereco() {
     function enderecosHandler(endereco: Object) {////Atualiza a lista de enderecos do formulario atráves do componente Endereco
         setEndereco(endereco);
     }
+
+    //temporario apenas para sumir com o erro
+    console.log(endereco);
 
     return (
         <>

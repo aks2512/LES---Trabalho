@@ -5,14 +5,14 @@ import { useState, useEffect } from "react";
 import "../styles/dadosPessoais.scss";
 
 const ex_cliente = {
-  cli_pnome:"",
-  cli_unome:"",
-  cli_rg:"",
-  cli_cpf:"",
-  cli_email:"",
-  cli_telefone:"",
-  cli_dtnascimento:"",
-  cli_ddd:"",
+  cli_pnome: "",
+  cli_unome: "",
+  cli_rg: "",
+  cli_cpf: "",
+  cli_email: "",
+  cli_telefone: "",
+  cli_dtnascimento: "",
+  cli_ddd: "",
   cli_sexo: "Masculino",
   type: "cliente"
 }
@@ -24,12 +24,12 @@ type cliProps = {
 };
 
 export function DadosPessoais(props: cliProps) {
-  
-  const [cliente, setCliente] = useState(props.preSet||ex_cliente);
+
+  const [cliente, setCliente] = useState(props.preSet || ex_cliente);
 
   useEffect(() => {
     props.callback(cliente);
-  }, [cliente]);
+  }, [props, cliente]);
 
   //Seta os dados do cliente
   function handleCliente(e: any) {
@@ -42,9 +42,9 @@ export function DadosPessoais(props: cliProps) {
 
   //Renderiza os campos de senha
   const renderSenha = () => {
-    {
-      if (props.formSenha) {
-        return <>
+    if (props.formSenha) {
+      return (
+        <>
           <div className="labeled__input">
             <label htmlFor="cli_senha">Senha</label>
             <input
@@ -66,7 +66,7 @@ export function DadosPessoais(props: cliProps) {
               required />
           </div>
         </>
-      }
+      )
     }
   }
 

@@ -61,7 +61,7 @@ export function Endereco(props: endProps) {
 
   useEffect(() => {
     props.callback(endereco, props.index);
-  }, [endereco, props.index]);
+  }, [endereco, props]);
 
   //Seta os valores de enderecos
   function handleEndereco(e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) {
