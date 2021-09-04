@@ -21,10 +21,9 @@ import api from "../api";
 
 export function DetalhesDaConta() {
     const history = useHistory();
-    const { user } = useContext(Context);
     const [isLoading, setLoading] = useState(true);
     const [cliente, setCliente] = useState({
-        id:1,
+        type: "cliente",
         cli_pnome: "",
         cli_unome: "",
         cli_rg: "",
@@ -56,7 +55,6 @@ export function DetalhesDaConta() {
             car_nome:"",
             car_validade:""
         }],
-        type: "cliente"
     });
 
     useEffect(() => {
@@ -75,11 +73,10 @@ export function DetalhesDaConta() {
         let date = new Date(cliente.cli_dtnascimento);
 
         cliente.cli_dtnascimento = moment(date).format()
-        cliente.type = "cliente"
 
-        cliente.id = user.email
-
-        await api.put("/clientes/update", cliente);
+        console.log(cliente)
+        const query = await api.put("/clientes/update", cliente);
+        console.log(query)
 
         cliente.cli_dtnascimento = temp_clidt
 
@@ -88,7 +85,6 @@ export function DetalhesDaConta() {
 
 
     async function getCliente() {
-        console.log("user",user)
         const res = await api.post("/clientes/readId", { "type": "cliente" });
         setCliente(res.data[0])//api sempre retorna os dados em forma de vetor - só precisamos da primeira posição deste
         setLoading(false)
@@ -139,7 +135,7 @@ export function DetalhesDaConta() {
                     <div className="row justify-content-center align-items-center">
                         <div className="col-12 col-lg-6 cliente__form__alterar">
                             <Form
-                                submitFunction={() => { alert("Aguarde o carregamento do seus dados...") }}
+                                submitFunction={(e: FormEvent) => updateCliente(e)}
                                 title="Detalhes da Conta"
                                 buttonText="Aguarde..."
                                 modalMessage="Atualizado com sucesso"
@@ -179,7 +175,7 @@ export function DetalhesDaConta() {
                                 />
 
                                 <div className="link2">
-                                    <Link to="/editarSenha">desativar conta</Link>
+                                    <button>desativar conta</button>
                                 </div>
 
                             </Form>
