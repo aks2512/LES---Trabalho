@@ -66,10 +66,61 @@
             .buttons {
                 display: flex;
                 align-items: center;
+                flex-direction: column;
                 justify-content: center;
                 button {
+                    width: 100%;
                     font-size: 16px;
                     margin: 20px 0;
+                }
+            }
+
+        }
+
+        .total_carrinho {
+            padding: 15px;
+            height: 300px;
+            box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.4);
+    
+            .valores {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+    
+                p {
+                    font-size: 14px;
+                    width: 50%;
+                }
+    
+                h5 {
+                    width: 45%;
+                    text-align: start;
+                }
+            }
+    
+            .selecionar_endereco {
+                margin: 20px 0;
+                select {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+            }
+    
+            .buttons {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+                button, a {
+                    text-align: center;
+                    text-decoration: none;
+                    width: 100%;
+                    font-size: 16px;
+                    margin: 20px 0;
+                }
+
+                a:hover {
+                    color: white;
                 }
             }
         }

@@ -13,6 +13,7 @@ import { EditarCartao } from './pages/EditarCartao';
 import { EditarSenha } from './pages/EditarSenha';
 import { DetalhesDaConta } from './pages/DetalhesDaConta';
 import { CarrinhoDeCompras } from './pages/CarrinhoDeCompras';
+import { SelecaoDeEndereco } from './pages/SelecaoDeEndereco';
 
 import './styles/fonts.scss';
 import './styles/animation.scss';
@@ -40,6 +41,7 @@ export function Routes() {
           <UserRoute isPrivate={false}  path="/" exact component={Home} />
           <UserRoute isPrivate={false}  path="/cadastroCliente" exact component={CadastroCliente} />
           <UserRoute isPrivate={false}  path="/carrinhoDeCompras" exact component={CarrinhoDeCompras} />
+          <UserRoute isPrivate={false}  path="/selecaoDeEndereco" exact component={SelecaoDeEndereco} />
           <UserRoute isPrivate={true}  path="/cadastroCartao" exact component={CadastroCartao} />
           <UserRoute isPrivate={true}  path="/cadastroEndereco" exact component={CadastroEndereco} />
           <UserRoute isPrivate={true}  path="/editarEndereco" exact component={EditarEndereco} />

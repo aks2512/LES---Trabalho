@@ -1,112 +1,47 @@
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
+import { CarrinhoProduto } from "../components/CarrinhoProduto";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { Context } from '../contexts/AuthContext';
 
 import '../styles/carrinhoDeCompras.scss';
 
-import livro from '../assets/images/livro.png';
-
 export function CarrinhoDeCompras() {
+
+    const { authenticated } = useContext(Context);
+
+    function continuarCompra() {
+        if(authenticated) {
+            return (
+                <Link to="/selecaoDeEndereco" className="button">Continuar Compra</Link>
+            );
+        } else {
+            return (
+                <Link to="/" className="button">Continuar Compra</Link>
+            )
+        }
+    }
     return (
         <>
             <Header/>
             <main>
                 <div className="carrinhoDeCompras container">
-                    <div className="row">
-                        <div className="produtos col-12 col-md-8">
-                            <div className="produto">
-                                <img width="52" src={livro} alt="" />
-                                <h5 className="produto_nome">Produto 1</h5>
-                                <div className="produto_quantidade">
-                                    <label htmlFor="">QTD: </label>
-                                    <input
-                                        type="number"
-                                        value="1"
-                                        onChange={() => console.log('value')} 
-                                    />
-                                </div>
-                                <h5 className="produto_preco">R$ 49,90</h5>
-                            </div>
-                            <div className="produto">
-                                <img width="52" src={livro} alt="" />
-                                <h5 className="produto_nome">Produto 1</h5>
-                                <div className="produto_quantidade">
-                                    <label htmlFor="">QTD: </label>
-                                    <input
-                                        type="number"
-                                        value="1"
-                                        onChange={() => console.log('value')} 
-                                    />
-                                </div>
-                                <h5 className="produto_preco">R$ 49,90</h5>
-                            </div>
-                            <div className="produto">
-                                <img width="52" src={livro} alt="" />
-                                <h5 className="produto_nome">Produto 1</h5>
-                                <div className="produto_quantidade">
-                                    <label htmlFor="">QTD: </label>
-                                    <input
-                                        type="number"
-                                        value="1"
-                                        onChange={() => console.log('value')} 
-                                    />
-                                </div>
-                                <h5 className="produto_preco">R$ 49,90</h5>
-                            </div>
+                    <div className="row justify-content-center">
+                        <div className="produtos col-12">
+                            <CarrinhoProduto />
+                            <CarrinhoProduto />
+                            <CarrinhoProduto />
                         </div>
-                        <div className="total col-12 col-md-4">
-                            <div className="valores">
-                                <p>Produtos</p>
-                                <h5>R$ 500,00</h5>
-                            </div>
-
-                            <div className="valores">
-                                <p>Frete</p>
-                                <h5>R$ 50,00</h5>
-                            </div>
-
+                        <div className="total_carrinho col-12 col-md-4">
                             <div className="valores">
                                 <p>Total</p>
-                                <h5>R$ 50,00</h5>
+                                <h5>R$ 500,00</h5>
                             </div>
-
-                            <div className="selecionar_endereco">
-
-                                <select name="endereco_cobranca" id="endereco_cobranca">
-                                    <option value="" disabled selected>endereco de cobrança</option>
-                                    <option>endereco 1</option>
-                                    <option>endereco 2</option>
-                                </select>
-
-                                <select name="endereco_entrega" id="endereco_entrega">
-                                    <option value="" disabled selected>endereco de entrega</option>
-                                    <option>endereco 1</option>
-                                    <option>endereco 2</option>
-                                </select>
-
-                            </div>
-
-                            <div className="frete">
-                                <label htmlFor="frete-checkbox1">
-                                    <input 
-                                        id="frete-checkbox1"
-                                        name="frete"
-                                        type="radio"
-                                    /> Transportadora 1
-                                </label>
-                            </div>
-
-                            <div className="frete">
-                                <label htmlFor="frete-checkbox2">
-                                    <input 
-                                        id="frete-checkbox2"
-                                        name="frete"
-                                        type="radio"
-                                    /> Transportadora 2
-                                </label>
-                            </div>
-
                             <div className="buttons">
-                                <button className="button">Continuar Compra</button>
+                                <Link to="/" className="button">Continuar Comprando</Link>
+                                {continuarCompra()}
                             </div>
 
                         </div>
