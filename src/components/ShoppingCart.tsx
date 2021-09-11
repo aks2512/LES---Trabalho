@@ -6,7 +6,7 @@ import '../styles/shoppingCart.scss';
 
 export function ShoppingCart() {
     return (
-        <Link to="/#">
+        <Link to="/carrinhoDeCompras">
             <div className="shoppingCart">
                 <div>2</div>
                 <img src={shoppingCart} alt="" />

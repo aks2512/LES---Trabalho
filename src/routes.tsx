@@ -12,6 +12,7 @@ import { EditarEndereco } from './pages/EditarEndereco';
 import { EditarCartao } from './pages/EditarCartao';
 import { EditarSenha } from './pages/EditarSenha';
 import { DetalhesDaConta } from './pages/DetalhesDaConta';
+import { CarrinhoDeCompras } from './pages/CarrinhoDeCompras';
 
 import './styles/fonts.scss';
 import './styles/animation.scss';
@@ -38,12 +39,13 @@ export function Routes() {
         <Switch>
           <UserRoute isPrivate={false}  path="/" exact component={Home} />
           <UserRoute isPrivate={false}  path="/cadastroCliente" exact component={CadastroCliente} />
-          <UserRoute isPrivate={false}  path="/cadastroCartao" exact component={CadastroCartao} />
-          <UserRoute isPrivate={false}  path="/cadastroEndereco" exact component={CadastroEndereco} />
-          <UserRoute isPrivate={false}  path="/editarEndereco" exact component={EditarEndereco} />
-          <UserRoute isPrivate={false}  path="/editarCartao" exact component={EditarCartao} />
-          <UserRoute isPrivate={false}  path="/editarSenha" exact component={EditarSenha} />
-          <UserRoute isPrivate={false}  path="/detalhesDaConta" exact component={DetalhesDaConta} />
+          <UserRoute isPrivate={false}  path="/carrinhoDeCompras" exact component={CarrinhoDeCompras} />
+          <UserRoute isPrivate={true}  path="/cadastroCartao" exact component={CadastroCartao} />
+          <UserRoute isPrivate={true}  path="/cadastroEndereco" exact component={CadastroEndereco} />
+          <UserRoute isPrivate={true}  path="/editarEndereco" exact component={EditarEndereco} />
+          <UserRoute isPrivate={true}  path="/editarCartao" exact component={EditarCartao} />
+          <UserRoute isPrivate={true}  path="/editarSenha" exact component={EditarSenha} />
+          <UserRoute isPrivate={true}  path="/detalhesDaConta" exact component={DetalhesDaConta} />
         </Switch>
     </BrowserRouter>
   );

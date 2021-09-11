@@ -1,0 +1,77 @@
+.carrinhoDeCompras {
+    .row {
+        .produtos {
+            .produto {
+                padding: 10px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.4);
+                margin-bottom: 20px;
+                
+                img {
+                    width: 10%;
+                }
+                
+                .produto_nome {
+                    width: 30%;
+                }
+
+                .produto_quantidade {
+                    width: 15%;
+                    display: flex;
+                    input {
+                        width: 100%;
+                        margin-left: 5px;
+                    }
+                }
+
+                .produto_preco {
+                   width: 30%;
+                }
+
+            }
+        }
+
+        .total {
+            padding: 15px;
+            height: 400px;
+            box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.4);
+
+            .valores {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                p {
+                    font-size: 14px;
+                    width: 50%;
+                }
+
+                h5 {
+                    width: 45%;
+                    text-align: start;
+                }
+            }
+
+            .selecionar_endereco {
+                margin: 20px 0;
+                select {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .buttons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                button {
+                    font-size: 16px;
+                    margin: 20px 0;
+                }
+            }
+        }
+    }
+}
