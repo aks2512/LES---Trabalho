@@ -19,7 +19,7 @@ export function CarrinhoDeCompras() {
             );
         } else {
             return (
-                <Link to="/" className="button">Continuar Compra</Link>
+                <Link to="/autenticacaoCarrinho" className="button">Continuar Compra</Link>
             )
         }
     }
@@ -40,7 +40,7 @@ export function CarrinhoDeCompras() {
                                 <h5>R$ 500,00</h5>
                             </div>
                             <div className="buttons">
-                                <Link to="/" className="button">Continuar Comprando</Link>
+                                <Link to="/autenticacaoCarrinho" className="button">Continuar Comprando</Link>
                                 {continuarCompra()}
                             </div>
 
