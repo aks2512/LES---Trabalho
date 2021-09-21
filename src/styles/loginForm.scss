@@ -14,6 +14,7 @@
     border-radius: 20px;
 
     .boxMessage {
+        position: relative;
         background: $blue1;
         padding: 65px;
         margin: 0;
@@ -49,6 +50,18 @@
             border: none;
             color: $black;
             border-radius: 8px;
+        }
+
+        .close {
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: url('../assets/images/x.png');
+            background-size: cover;
+            width: 20px;
+            height: 20px;
+            z-index: 3;
         }
         
     }

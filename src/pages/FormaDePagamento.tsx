@@ -19,64 +19,6 @@ export function FormaDePagamento() {
         {value: 'cupon3', label: 'cupon3'}
     ]
 
-    const [numeroDeCartoes, setNumeroDeCartoes] = useState(1);
-    const [numeroDeCupons, setNumeroDeCupons] = useState(0);
-
-    function addPaymentCardFields() {
-        setNumeroDeCartoes(numeroDeCartoes+1)
-    }
-
-    function getPaymentCardFields() {
-        let selects = [];
-        
-        for (let i = 0; i < numeroDeCartoes; i++) {
-            selects.push(getCardFields(i));
-        }
-        console.log(selects);
-        return selects;
-
-    }
-
-    function getCardFields(index: number) {
-        return (
-            <>
-                <select name="cartoes[]" id={"cartoes_"+index}>
-                    {optionsCartoes.map((option,index) =>
-                        <option key={index} value={option.value}>{option.label}</option>
-                    )}
-                </select>   
-                <input name="cartoes_valor[]" type="text" />
-            </>
-        )
-    }
-
-    function addPaymentCupomFields() {
-        setNumeroDeCupons(numeroDeCupons+1)
-    }
-
-    function getPaymentCupomFields() {
-        let selects = [];
-        
-        for (let i = 0; i < numeroDeCupons; i++) {
-            selects.push(getCupomFields(i));
-        }
-        console.log(selects);
-        return selects;
-
-    }
-
-    function getCupomFields(index: number) {
-        return (
-            <>
-                <select name="cupons[]" id={"cupom_"+index}>
-                    {optionsCupons.map((option,index) =>
-                        <option key={index} value={option.value}>{option.label}</option>
-                    )}
-                </select>   
-            </>
-        )
-    }
-
     return (
         <>
             <Header/>
@@ -97,18 +39,19 @@ export function FormaDePagamento() {
 
                             <form>
                                 <div className="formasDePagamento">
-                                    <div className="formaDePagamento__cartoes">
-                                        <button type="button" onClick={ () => addPaymentCardFields()} className="btn__addPagamentoCartao">Adicionar cartão</button>
-                                        {getPaymentCardFields()}
-                                    </div>
-                                    <div className="formaDePagamento__cupons">
-                                        <button type="button" onClick={ () => addPaymentCupomFields()} className="btn__addPagamentoCupons">Adicionar Cupom</button>
-                                        {getPaymentCupomFields()}
-                                    </div>
-                                </div>
 
-                                <div className="cupomDeDesconto">
-                                    <input type="text" placeholder="Insira um cupom promocional" />
+                                <select name="cartao" id="cartao">
+                                    {optionsCartoes.map((option,index) =>
+                                        <option key={index} value={option.value}>{option.label}</option>
+                                    )}
+                                </select>
+
+                                <select name="cupons" id="cupom">
+                                    {optionsCupons.map((option,index) =>
+                                        <option key={index} value={option.value}>{option.label}</option>
+                                    )}
+                                </select>  
+
                                 </div>
 
                                 <div className="buttons">

@@ -45,7 +45,7 @@ export function Routes() {
           <UserRoute isPrivate={false}  path="/carrinhoDeCompras" exact component={CarrinhoDeCompras} />
           <UserRoute isPrivate={false}  path="/autenticacaoCarrinho" exact component={AutenticacaoCarrinho} />
           <UserRoute isPrivate={false}  path="/formaDePagamento" exact component={FormaDePagamento} />
-          <UserRoute isPrivate={true}  path="/selecaoDeEndereco" exact component={SelecaoDeEndereco} />
+          <UserRoute isPrivate={false}  path="/selecaoDeEndereco" exact component={SelecaoDeEndereco} />
           <UserRoute isPrivate={true}  path="/cadastroCartao" exact component={CadastroCartao} />
           <UserRoute isPrivate={true}  path="/cadastroEndereco" exact component={CadastroEndereco} />
           <UserRoute isPrivate={true}  path="/editarEndereco" exact component={EditarEndereco} />

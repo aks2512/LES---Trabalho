@@ -20,9 +20,14 @@ export function LoginForm(props:loginFormProps) {
         props.setShowLoginForm(false);
     }
 
+    function loginFormClose() {
+        props.setShowLoginForm(false);
+    }
+
     return (
         <div className="login__form" >
             <div className="boxMessage">
+            <div onClick={() => loginFormClose()} className="close"></div>
                <h1>Entre com a sua conta</h1>
                <form onSubmit={e => formSubmit(e)}>
                     <input
