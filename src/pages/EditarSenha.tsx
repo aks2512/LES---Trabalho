@@ -17,7 +17,7 @@ export function EditarSenha() {
 
     async function updatePasswordForm(e:FormEvent) {
         e.preventDefault();
-        console.log('teste')
+
         if(password === confirmPassword) {
             await api.put('clientes/updatePassword', {
                 "cli_senha": password,

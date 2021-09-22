@@ -1,0 +1,28 @@
+@import 'variables';
+.cartoes__form{
+    display:grid;
+    background-color:$greyishBlue;
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 20px;
+    gap: 10px;
+    .labeled__input{
+        display:grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 25px 1fr;
+        grid-area: 
+        "label"
+        "input";
+        label{
+            grid-area: "label";
+        }
+
+        input{
+            grid-area: "input";
+        }
+    }
+    input{
+        align-self: self-end;
+    }
+}

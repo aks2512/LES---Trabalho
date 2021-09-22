@@ -63,7 +63,7 @@ export function Endereco(props: endProps) {
     props.callback(endereco, props.index);
   }, [endereco, props]);
 
-  //Seta os valores de enderecos
+  //Carrega os valores de enderecos
   function handleEndereco(e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value;
     setEndereco({
@@ -72,7 +72,7 @@ export function Endereco(props: endProps) {
     });
   }
 
-  //Seta o id dos enderecos do formulario
+  //Carrega o id dos enderecos do formulario
   const renderIndex = () => {
       if(typeof props.index !== undefined){
         return <div className="enderecos__form__index">Endereco - ({props.index})</div>

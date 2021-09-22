@@ -1,8 +1,16 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Form } from '../components/Form';
+import { Cartao } from '../components/Cartao'
+import { useState } from 'react';
 
 export function CadastroCartao() {
+    const [cartao, setCartao] = useState({});
+
+    function cartaoHandler(cliente: any) {//Atualiza o cliente do formulario atráves do componente DadosPessoais
+        setCartao(cliente);
+    }
+
     return (
         <>
             <Header />
@@ -15,10 +23,7 @@ export function CadastroCartao() {
                         buttonText="Cadastrar"
                         modalMessage="Cadastrado com sucesso" 
                     >
-                        <input type="text" placeholder="Numero do Cartão" />
-                        <input type="text" placeholder="Nome do Cartão" />
-                        <input type="text" placeholder="Expiração MM/AA" />
-                        <input type="password" placeholder="Código de Segurança" />
+                        <Cartao key="cartao" callback={(e: Object) => {cartaoHandler(e);}}/>
                     </Form>
                 </div>
             </main>
