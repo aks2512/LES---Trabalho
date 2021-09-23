@@ -40,7 +40,7 @@ export function CarrinhoDeCompras() {
                                 <h5>R$ 500,00</h5>
                             </div>
                             <div className="buttons">
-                                <Link to="/autenticacaoCarrinho" className="button">Continuar Comprando</Link>
+                                <Link to="/" className="button">Voltar a Loja</Link>
                                 {continuarCompra()}
                             </div>
 

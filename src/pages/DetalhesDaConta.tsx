@@ -20,6 +20,7 @@ import api from "../api";
 
 
 export function DetalhesDaConta() {
+    const {setUser} = useContext(Context)
     const history = useHistory();
     const [isLoading, setLoading] = useState(true);
     const [cliente, setCliente] = useState({
@@ -74,8 +75,13 @@ export function DetalhesDaConta() {
 
         cliente.cli_dtnascimento = moment(date).format()
 
+        cliente.type = "cliente";
+
         const query = await api.put("/clientes/update", cliente);
+
         cliente.cli_dtnascimento = temp_clidt
+
+        setUser(cliente.cli_pnome);
 
         history.push('/detalhesDaConta')
     }
