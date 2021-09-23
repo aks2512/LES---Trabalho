@@ -15,8 +15,8 @@ type endProps = {
 export function Cartao(props: endProps) {
 
   const bandeiraOpts = [
-    {valor:"elo",texto:"Elo"},
-    {valor:"mastercard",texto:"Mastercard"}
+    {valor:"1",texto:"Elo"},
+    {valor:"2",texto:"Mastercard"}
   ]
 
   const [cartao, setCartao] = useState({
