@@ -38,7 +38,7 @@ export function CadastroCliente() {
   const tiposExigidos = ["cobranca", "entrega"];
 
   useEffect(() => {
-    console.log("Search message inside useEffect: ", enderecos);
+
   }, [enderecos]);
 
   function enderecosHandler(endereco: Object, key: number) {////Atualiza a lista de enderecos do formulario atráves do componente Endereco
@@ -62,7 +62,7 @@ export function CadastroCliente() {
       );
       if (tipoIndex >= 0) validaTipos.splice(tipoIndex, 1);
     });
-    console.log(validaTipos)
+
     if (Object.keys(validaTipos).length !== 0) {
       let str = ""
       validaTipos.forEach((item)=>{
@@ -81,6 +81,8 @@ export function CadastroCliente() {
     let tempData = cliente.cli_dtnascimento;
 
     cliente.cli_dtnascimento = moment(date).format()
+
+    console.log(cliente)
 
     let res = await api.post("/clientes/insert", cliente);
 

@@ -109,7 +109,7 @@ export function DetalhesDaConta() {
                 </>
             })
         }else{
-            return <Card editar="">Carregando Enderecos...</Card>
+            return <Card key="cli_carregando" editar="">Carregando Enderecos...</Card>
         }
     }
 
@@ -126,7 +126,7 @@ export function DetalhesDaConta() {
                 </>
             })
         }else{
-            if(isLoading) return <Card editar="">Carregando Cartões...</Card>
+            if(isLoading) return <Card key="car_carregando" editar="">Carregando Cartões...</Card>
         }
     }
 
