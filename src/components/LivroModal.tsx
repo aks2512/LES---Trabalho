@@ -7,6 +7,7 @@ type LivroModalProps = {
 }
 
 export function LivroModal(props: LivroModalProps) {
+
     return (
         <div className="livroModal">
             <div className="boxMessage">
