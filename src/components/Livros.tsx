@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { MouseEvent, useLayoutEffect, useState } from 'react';
 import api from '../api';
 import '../styles/livros.scss';
 
@@ -15,6 +15,7 @@ type livroType = {
 export function Livros() {
     const [isLoading, setIsLoading] = useState(false);
     const [livros, setLivros] = useState<livroType[]>();
+    const [livroId, setLivroId] = useState<string>();
     const [livroModal, setLivroModal] = useState(false);
 
     useLayoutEffect(() => {
@@ -29,7 +30,8 @@ export function Livros() {
         getLivros();
     }, [])
 
-    function openLivroModal() {
+    async function openLivroModal(value: string) {
+        setLivroId(value);
         setLivroModal(true);
     }
 
@@ -62,7 +64,7 @@ export function Livros() {
                     <h5 className="book__list__title">Livros</h5>
                     <div className="book__list__cards">
                         {isLoading && renderLivros()}
-                        {livroModal ? <LivroModal closeModal={closeLivroModal} /> : null}
+                        {livroModal ? <LivroModal liv_id={livroId} closeModal={closeLivroModal} /> : null}
                     </div>
                 </div>
             </div>

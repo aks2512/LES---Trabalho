@@ -25,7 +25,7 @@ type LivroProps = {
 	liv_mlucro?: number,
 	liv_preco?: number,
 	liv_cbarras?: string,
-	liv_ativo?: true
+	liv_ativo?: true,
     openModal:Function
 }
 
@@ -37,13 +37,13 @@ export function Livro(props: LivroProps) {
                 <img src={livro} alt="" />
             </div>
             <div className="card__content">
-                <Link to="/#">
+                <Link to="/#" id={''+props.liv_id} onClick={(e) => props.openModal(e.currentTarget.id)}>
                     <p>{props.liv_nome}</p>
                     <span>{props.liv_editora}</span>
                     <h5>R$ {props.liv_preco}</h5>
                 </Link>
 
-                <Link to="/#" id={''+props.liv_id} onClick={(e) => props.openModal(e.currentTarget.id)} className="button">Adicionar ao carrinho</Link>
+                <Link to="/#" className="button">Adicionar ao carrinho</Link>
             
             </div>
         </div>
