@@ -1,6 +1,6 @@
 //React
 import { useHistory } from "react-router-dom";
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 
 //Componentes
 import { Footer } from '../components/Footer';
@@ -11,9 +11,13 @@ import { Cartao } from '../components/Cartao'
 //API
 import api from '../api';
 
+//CONTEXT
+import { CartContext } from "../contexts/CartContext";
+
 export function CadastroCartao() {
     const history = useHistory();
     const [cartao, setCartao] = useState({});
+    const { carrinhoItens } = useContext(CartContext);
 
     function cartaoHandler(cartao: any) {//Atualiza o cliente do formulario atráves do componente DadosPessoais
         setCartao(cartao);
@@ -34,7 +38,7 @@ export function CadastroCartao() {
 
     return (
         <>
-            <Header />
+            <Header numberOfItens={carrinhoItens.length} />
             <main>
                 <div className="container">
                     <Form 

@@ -1,11 +1,12 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../styles/livros.scss';
 import livro from '../assets/images/livro.png';
 
-type LivroProps = {
-    liv_id: number,
-    liv_valor?: number,
+type livroType = {
+	liv_id?: number,
+	liv_valor?: number,
 	liv_nome?: string,
 	liv_autor?: string,
 	liv_categoria?: string,
@@ -26,10 +27,15 @@ type LivroProps = {
 	liv_preco?: number,
 	liv_cbarras?: string,
 	liv_ativo?: true,
-    openModal:Function
 }
 
-export function Livro(props: LivroProps) {
+type livroProps = {
+	data:livroType,
+    openModal:Function,
+	addCarrinho:Function
+}
+
+export function Livro(props: livroProps) {
 
     return (
         <div className="card">
@@ -37,13 +43,13 @@ export function Livro(props: LivroProps) {
                 <img src={livro} alt="" />
             </div>
             <div className="card__content">
-                <Link to="/#" id={''+props.liv_id} onClick={(e) => props.openModal(e.currentTarget.id)}>
-                    <p>{props.liv_nome}</p>
-                    <span>{props.liv_editora}</span>
-                    <h5>R$ {props.liv_preco}</h5>
+                <Link to="/#" id={''+props.data.liv_id} onClick={(e) => props.openModal(e.currentTarget.id)}>
+                    <p>{props.data.liv_nome}</p>
+                    <span>{props.data.liv_editora}</span>
+                    <h5>R$ {props.data.liv_preco}</h5>
                 </Link>
 
-                <Link to="/#" className="button">Adicionar ao carrinho</Link>
+                <Link to="/#" onClick={() => props.addCarrinho(props.data)} className="button">Adicionar ao carrinho</Link>
             
             </div>
         </div>

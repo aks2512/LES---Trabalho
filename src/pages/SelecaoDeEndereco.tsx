@@ -1,20 +1,30 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { CarrinhoProduto } from "../components/CarrinhoProduto";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
+//CONTEXT
+import { CartContext } from "../contexts/CartContext";
+
 import '../styles/carrinhoDeCompras.scss';
 
 export function SelecaoDeEndereco() {
+    const { carrinhoItens } = useContext(CartContext);
+
     return (
         <>
-            <Header/>
+            <Header numberOfItens={carrinhoItens.length} />
             <main>
                 <div className="carrinhoDeCompras container">
                     <div className="row">
                         <div className="produtos col-12 col-md-8">
-                            <CarrinhoProduto />
-                            <CarrinhoProduto />
-                            <CarrinhoProduto />
+                            {carrinhoItens.map((item:any, index:number) => (
+                                <CarrinhoProduto 
+                                    key={index}
+                                    data={item}
+                                />
+                            ))}
                         </div>
                         <div className="total col-12 col-md-4">
                             <div className="valores">
@@ -69,7 +79,7 @@ export function SelecaoDeEndereco() {
                             </div>
 
                             <div className="buttons">
-                                <button className="button">Continuar Compra</button>
+                                <Link style={{fontSize: '16px', textDecoration: 'none'}} to="/formaDePagamento" className="button">Continuar Compra</Link>
                             </div>
 
                         </div>

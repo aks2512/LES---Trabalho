@@ -12,11 +12,13 @@ import { Cards } from "../components/Cards";
 import { Card } from "../components/Card";
 import { DadosPessoais } from "../components/DadosPessoais";
 
-//Sessão do usuário
+//CONTEXT
 import { Context } from "../contexts/AuthContext";
+import { CartContext } from "../contexts/CartContext";
 
 //API
 import api from "../api";
+
 
 
 export function DetalhesDaConta() {
@@ -57,6 +59,7 @@ export function DetalhesDaConta() {
             car_validade:""
         }],
     });
+    const { carrinhoItens } = useContext(CartContext);
 
     useEffect(() => {
         if (cliente.cli_email === "") getCliente()
@@ -132,7 +135,7 @@ export function DetalhesDaConta() {
 
     if (isLoading) {
         return <div>
-            <Header />
+            <Header numberOfItens={carrinhoItens.length} />
             <main>
                 <div className="container">
                     <div className="row justify-content-center align-items-center">
@@ -154,7 +157,7 @@ export function DetalhesDaConta() {
 
     return (
         <div>
-            <Header />
+            <Header numberOfItens={carrinhoItens.length} />
             <main>
                 <div className="container">
                     <div className="row justify-content-center align-items-center">

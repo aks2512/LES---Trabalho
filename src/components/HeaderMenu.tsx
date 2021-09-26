@@ -8,6 +8,7 @@ import { Context } from '../contexts/AuthContext'
 import { ShoppingCart } from './ShoppingCart';
 
 type headerMenuProps = {
+    numberOfItens?: number,
     openLoginForm: Function;
 }
 
@@ -30,7 +31,9 @@ export function HeaderMenu(props:headerMenuProps) {
                 </>
             )}
             <li>
-                <ShoppingCart/>
+                <ShoppingCart
+                    numberOfItens={props.numberOfItens}
+                />
             </li>
         </ul>
     );

@@ -16,6 +16,9 @@ import api from "../api";
 //Contextos
 import { Context } from "../contexts/AuthContext";
 
+//CONTEXT
+import { CartContext } from "../contexts/CartContext";
+
 export function CadastroCliente() {
   const history = useHistory();
   const {handleLogin} = useContext(Context);
@@ -34,6 +37,7 @@ export function CadastroCliente() {
     cli_ddd:"",
     enderecos:[{}]
   });
+  const { carrinhoItens } = useContext(CartContext);
 
   const tiposExigidos = ["cobranca", "entrega"];
 
@@ -108,7 +112,7 @@ export function CadastroCliente() {
 
   return (
     <>
-      <Header />
+      <Header numberOfItens={carrinhoItens.length} />
       <main>
         <div className="container cliente__form__cadastro">
           <Form

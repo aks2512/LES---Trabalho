@@ -9,11 +9,15 @@ import { Context } from '../contexts/AuthContext';
 
 import api from '../api';
 
+//CONTEXT
+import { CartContext } from "../contexts/CartContext";
+
 export function EditarSenha() {
     const history = useHistory();
     const { handleLogout } = useContext(Context)
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const { carrinhoItens } = useContext(CartContext);
 
     async function updatePasswordForm(e:FormEvent) {
         e.preventDefault();
@@ -29,7 +33,7 @@ export function EditarSenha() {
 
     return (
         <>
-            <Header />
+            <Header numberOfItens={carrinhoItens.length} />
             <main>
                 <div className="container">
                     <Form 

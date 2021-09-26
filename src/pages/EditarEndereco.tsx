@@ -1,8 +1,12 @@
+import { useContext, useState } from 'react';
+
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Form } from '../components/Form';
 import { Endereco } from '../components/Endereco';
-import { useState } from 'react';
+
+//CONTEXT
+import { CartContext } from "../contexts/CartContext";
 
 type endProps = {
     index?: number;
@@ -25,6 +29,7 @@ type endProps = {
 
 export function EditarEndereco() {
     const [endereco, setEndereco] = useState<endProps>();
+    const { carrinhoItens } = useContext(CartContext);
 
     function enderecosHandler(endereco: endProps) {////Atualiza a lista de enderecos do formulario atráves do componente Endereco
         setEndereco(endereco);
@@ -32,7 +37,7 @@ export function EditarEndereco() {
 
     return (
         <>
-            <Header />
+            <Header numberOfItens={carrinhoItens.length} />
             <main>
                 <div className="container">
                     <Form 

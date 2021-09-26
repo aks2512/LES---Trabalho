@@ -5,18 +5,47 @@ import '../styles/livros.scss';
 import { Livro } from './Livro';
 import { LivroModal } from './LivroModal';
 
-type livroType = {
-    liv_id: number,
-    liv_nome: string,
-    liv_editora: string,
-    liv_preco: number
+type livrosProps = {
+    carrinhoItens:livroType[],
+    setCarrinhoItens:Function
 }
 
-export function Livros() {
+type livroType = {
+    liv_id?: number,
+    liv_valor?: number,
+    liv_nome?: string,
+    liv_autor?: string,
+    liv_categoria?: string,
+    liv_ano?: string,
+    liv_titulo?: string,
+    liv_editora?: string,
+    liv_edicao?: string,
+    liv_isbn?: string,
+    liv_npaginas?: number,
+    liv_sinopse?: string,
+    liv_altura?: number,
+    liv_peso?: number,
+    liv_profundidade?: number,
+    liv_descricao?: string,
+    liv_estoque?: number,
+    liv_custo?: number,
+    liv_mlucro?: number,
+    liv_preco?: number,
+    liv_cbarras?: string,
+    liv_ativo?: true,
+}
+
+
+export function Livros(props:livrosProps) {
     const [isLoading, setIsLoading] = useState(false);
     const [livros, setLivros] = useState<livroType[]>();
     const [livroId, setLivroId] = useState<string>();
     const [livroModal, setLivroModal] = useState(false);
+
+	function addCarrinho(data:livroType) {
+		props.carrinhoItens.push(data);
+        props.setCarrinhoItens(props.carrinhoItens);
+	}
 
     useLayoutEffect(() => {
         async function getLivros() {
@@ -44,12 +73,10 @@ export function Livros() {
             return livros.map((livro, index) => 
                     (
                     <Livro
-                        key={'livro_'+index}
-                        liv_nome={livro.liv_nome}
-                        liv_editora={livro.liv_editora}
-                        liv_preco={livro.liv_preco}
-                        liv_id={livro.liv_id}
+                        key={index}
+                        data={livro}
                         openModal={openLivroModal}
+                        addCarrinho={addCarrinho}
                     />
                     )
             )

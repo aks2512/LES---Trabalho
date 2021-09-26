@@ -1,11 +1,18 @@
+import { useContext } from 'react';
+
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Form } from '../components/Form';
 
+//CONTEXT
+import { CartContext } from "../contexts/CartContext";
+
 export function EditarCartao() {
+    const { carrinhoItens } = useContext(CartContext);
+
     return (
         <>
-            <Header />
+            <Header numberOfItens={carrinhoItens.length} />
             <main>
                 <div className="container">
                     <Form 

@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { Context } from "../contexts/AuthContext";
+import { CartContext } from "../contexts/CartContext";
 
 import '../styles/loginFormCarrinho.scss';
 
@@ -11,6 +12,7 @@ export function AutenticacaoCarrinho() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
+    const { carrinhoItens } = useContext(CartContext);
 
     async function formSubmit(e:FormEvent) {
         e.preventDefault();
@@ -25,7 +27,7 @@ export function AutenticacaoCarrinho() {
 
     return (
         <>
-            <Header />
+            <Header numberOfItens={carrinhoItens.length} />
             <div className="login__form__carrinho" >
                 <div className="boxMessage">
                     <h1>Entre com a sua conta</h1>
