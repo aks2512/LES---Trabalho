@@ -4,9 +4,6 @@ import { CarrinhoProduto } from "../components/CarrinhoProduto";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
-import { calcularPrecoPrazo } from "correios-brasil";
-import cors from "cors";
-
 //CONTEXT
 import { CartContext } from "../contexts/CartContext";
 
@@ -54,10 +51,6 @@ export function SelecaoDeEndereco() {
         nCdServico: ['04014', '04510'], //Array com os códigos de serviço
         nVlDiametro: '0',
     });
-
-    function calculaFrete() {
-        
-    }
 
     function removeProduto(id:string) {
         let index = carrinhoItens.findIndex((item:livroType) => item.liv_id === id )
@@ -120,8 +113,6 @@ export function SelecaoDeEndereco() {
                                 </select>
 
                             </div>
-
-                            {calculaFrete()}
 
                             <div className="buttons">
                                 <Link style={{fontSize: '16px', textDecoration: 'none'}} to="/formaDePagamento" className="button">Continuar Compra</Link>
