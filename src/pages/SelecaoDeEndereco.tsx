@@ -1,16 +1,78 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { CarrinhoProduto } from "../components/CarrinhoProduto";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+
+import { calcularPrecoPrazo } from "correios-brasil";
+import cors from "cors";
 
 //CONTEXT
 import { CartContext } from "../contexts/CartContext";
 
 import '../styles/carrinhoDeCompras.scss';
 
+cors();
+
+type livroType = {
+    liv_id: string,
+    liv_valor?: string,
+    liv_nome?: string,
+    liv_autor?: string,
+    liv_categoria?: string,
+    liv_ano?: string,
+    liv_titulo?: string,
+    liv_editora?: string,
+    liv_edicao?: string,
+    liv_isbn?: string,
+    liv_npaginas?: string,
+    liv_sinopse?: string,
+    liv_altura?: string,
+    liv_peso?: string,
+    liv_profundidade?: string,
+    liv_descricao?: string,
+    liv_estoque?: string,
+    liv_custo?: string,
+    liv_mlucro?: string,
+    liv_preco: string,
+    liv_cbarras?: string,
+    liv_quantidade?: string,
+    liv_ativo?: true,
+}
+
 export function SelecaoDeEndereco() {
-    const { carrinhoItens } = useContext(CartContext);
+    const history = useHistory();
+    const { carrinhoItens, setCarrinhoItens } = useContext(CartContext);
+    const [freteData, setFreteData] = useState({
+        sCepOrigem: '08770320',
+        sCepDestino: '08770430',
+        nVlPeso: '1',
+        nCdFormato: '1',
+        nVlComprimento: '20',
+        nVlAltura: '20',
+        nVlLargura: '20',
+        nCdServico: ['04014', '04510'], //Array com os códigos de serviço
+        nVlDiametro: '0',
+    });
+
+    function calculaFrete() {
+        
+    }
+
+    function removeProduto(id:string) {
+        let index = carrinhoItens.findIndex((item:livroType) => item.liv_id === id )
+        carrinhoItens.splice(carrinhoItens[index], 1);
+        setCarrinhoItens(carrinhoItens);
+        history.push("/selecaoDeEndereco")
+    }
+
+    function calcularTotal() {
+        if(carrinhoItens) {
+            return carrinhoItens.reduce((sum:number, item:livroType) =>  
+                sum += parseFloat(item.liv_preco), 0
+            )
+        }
+    }
 
     return (
         <>
@@ -21,6 +83,7 @@ export function SelecaoDeEndereco() {
                         <div className="produtos col-12 col-md-8">
                             {carrinhoItens.map((item:any, index:number) => (
                                 <CarrinhoProduto 
+                                    removeProduto={removeProduto}
                                     key={index}
                                     data={item}
                                 />
@@ -29,12 +92,12 @@ export function SelecaoDeEndereco() {
                         <div className="total col-12 col-md-4">
                             <div className="valores">
                                 <p>Produtos</p>
-                                <h5>R$ 500,00</h5>
+                                <h5>R$ {calcularTotal()}</h5>
                             </div>
 
                             <div className="valores">
                                 <p>Frete</p>
-                                <h5>R$ 50,00</h5>
+                                <h5>R$ 50,00 | Prazo</h5>
                             </div>
 
                             <div className="valores">
@@ -58,25 +121,7 @@ export function SelecaoDeEndereco() {
 
                             </div>
 
-                            <div className="frete">
-                                <label htmlFor="frete-checkbox1">
-                                    <input 
-                                        id="frete-checkbox1"
-                                        name="frete"
-                                        type="radio"
-                                    /> Transportadora 1
-                                </label>
-                            </div>
-
-                            <div className="frete">
-                                <label htmlFor="frete-checkbox2">
-                                    <input 
-                                        id="frete-checkbox2"
-                                        name="frete"
-                                        type="radio"
-                                    /> Transportadora 2
-                                </label>
-                            </div>
+                            {calculaFrete()}
 
                             <div className="buttons">
                                 <Link style={{fontSize: '16px', textDecoration: 'none'}} to="/formaDePagamento" className="button">Continuar Compra</Link>

@@ -22,6 +22,7 @@ type livroType = {
   liv_mlucro?: string,
   liv_preco?: string,
   liv_cbarras?: string,
+  liv_quantidade?: string,
   liv_ativo?: true,
 }
 

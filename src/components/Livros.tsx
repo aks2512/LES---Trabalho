@@ -32,6 +32,7 @@ type livroType = {
     liv_mlucro?: number,
     liv_preco?: number,
     liv_cbarras?: string,
+    liv_quantidade?: string,
     liv_ativo?: true,
 }
 
@@ -43,8 +44,12 @@ export function Livros(props:livrosProps) {
     const [livroModal, setLivroModal] = useState(false);
 
 	function addCarrinho(data:livroType) {
-		props.carrinhoItens.push(data);
-        props.setCarrinhoItens(props.carrinhoItens);
+        let isExist = props.carrinhoItens.find((item) => item.liv_id === data.liv_id);
+        if(isExist === undefined) {
+            data.liv_quantidade = '1';
+            props.carrinhoItens.push(data);
+            props.setCarrinhoItens(props.carrinhoItens);
+        }
 	}
 
     useLayoutEffect(() => {

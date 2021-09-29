@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { CarrinhoProduto } from "../components/CarrinhoProduto";
 import { Footer } from "../components/Footer";
@@ -33,13 +33,19 @@ type livroType = {
     liv_mlucro?: string,
     liv_preco: string,
     liv_cbarras?: string,
+    liv_quantidade?: string,
     liv_ativo?: true,
 }
 
 export function CarrinhoDeCompras() {
 
     const { authenticated } = useContext(Context);
-    const { carrinhoItens } = useContext(CartContext);
+    const { carrinhoItens, setCarrinhoItens } = useContext(CartContext);
+    const history = useHistory();
+
+    useEffect(() => {
+        addProdutoCards();
+    }, [addProdutoCards])
 
     function continuarCompra() {
         if(authenticated) {
@@ -61,6 +67,25 @@ export function CarrinhoDeCompras() {
         }
     }
 
+    function removeProduto(id:string) {
+        let index = carrinhoItens.findIndex((item:livroType) => item.liv_id === id )
+        carrinhoItens.splice(carrinhoItens[index], 1);
+        setCarrinhoItens(carrinhoItens);
+        history.push("/carrinhoDeCompras")
+
+    }
+
+    function addProdutoCards() {
+
+        return carrinhoItens.map((item:any, index:number) => (
+            <CarrinhoProduto 
+                removeProduto={removeProduto}
+                key={index}
+                data={item}
+            />
+        ))
+    }
+
     return (
         <>
             <Header numberOfItens={carrinhoItens.length} />
@@ -68,12 +93,7 @@ export function CarrinhoDeCompras() {
                 <div className="carrinhoDeCompras container">
                     <div className="row justify-content-center">
                         <div className="produtos col-12">
-                            {carrinhoItens.map((item:any, index:number) => (
-                                <CarrinhoProduto 
-                                    key={index}
-                                    data={item}
-                                />
-                            ))}
+                            {addProdutoCards()}
                         </div>
                         <div className="total_carrinho col-12 col-md-4">
                             <div className="valores">

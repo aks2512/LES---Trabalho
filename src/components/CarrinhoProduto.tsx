@@ -1,7 +1,9 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, useContext, useState } from 'react';
 import '../styles/carrinhoDeCompras.scss';
 
 import livro from '../assets/images/livro.png';
+
+import { CartContext } from '../contexts/CartContext';
 
 type livroType = {
     liv_id?: number,
@@ -20,40 +22,44 @@ type livroType = {
     liv_peso?: number,
     liv_profundidade?: number,
     liv_descricao?: string,
-    liv_estoque?: number,
+    liv_estoque: number,
     liv_custo?: number,
     liv_mlucro?: number,
     liv_preco?: number,
     liv_cbarras?: string,
+    liv_quantidade: string,
     liv_ativo?: true,
 }
 
 type carrinhoDeComprasProps = {
     data: livroType,
+    removeProduto: Function
 }
 
 export function CarrinhoProduto(props:carrinhoDeComprasProps) {
+    const { carrinhoItens, setCarrinhoItens } = useContext(CartContext);
+    const [ quantidade, setQuantidade ] = useState(props.data.liv_quantidade)
 
-    function removeProduto(e:MouseEvent<HTMLDivElement>) {
-        e.preventDefault();
-        let close = e.currentTarget;
-        let produto = close.parentNode;
-        if(produto) {
-            produto.parentNode?.removeChild(produto);
-        }
+    function addQuantidade(value:string) {
+        let index = carrinhoItens.findIndex((item:livroType) => item.liv_id === props.data.liv_id )
+        carrinhoItens[index].liv_quantidade = value;
+        setCarrinhoItens(carrinhoItens)
+        setQuantidade(carrinhoItens[index].liv_quantidade);
     }
 
     return (
         <div className="produto">
-            <div onClick={(e) => removeProduto(e) } className="close"></div>
+            <div onClick={() => props.removeProduto(props.data.liv_id) } className="close"></div>
             <img width="52" src={livro} alt="" />
             <h5 className="produto_nome">{props.data.liv_nome}</h5>
             <div className="produto_quantidade">
                 <label htmlFor="">QTD: </label>
                 <input
                     type="number"
-                    value="1"
-                    onChange={() => console.log('value')} 
+                    pattern="[0-9]*"
+                    value={quantidade}
+                    max={props.data.liv_estoque}
+                    onChange={(e) => addQuantidade(e.currentTarget.value)} 
                 />
             </div>
             <h5 className="produto_preco">{props.data.liv_preco}</h5>
