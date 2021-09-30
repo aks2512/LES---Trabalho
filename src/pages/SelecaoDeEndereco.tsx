@@ -1,5 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+
+import api from "../api";
+
 import { CarrinhoProduto } from "../components/CarrinhoProduto";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
@@ -8,8 +11,6 @@ import { Header } from "../components/Header";
 import { CartContext } from "../contexts/CartContext";
 
 import '../styles/carrinhoDeCompras.scss';
-
-cors();
 
 type livroType = {
     liv_id: string,
@@ -40,23 +41,57 @@ type livroType = {
 export function SelecaoDeEndereco() {
     const history = useHistory();
     const { carrinhoItens, setCarrinhoItens } = useContext(CartContext);
-    const [freteData, setFreteData] = useState({
-        sCepOrigem: '08770320',
-        sCepDestino: '08770430',
-        nVlPeso: '1',
-        nCdFormato: '1',
-        nVlComprimento: '20',
-        nVlAltura: '20',
-        nVlLargura: '20',
-        nCdServico: ['04014', '04510'], //Array com os códigos de serviço
-        nVlDiametro: '0',
+    const [ freteData, setFreteData ] = useState();
+    const [ totalComFrete, setTotalComFrete] = useState(0.00);
+    const [ freteValor, setFreteValor] = useState(0.00);
+    const [freteReq, setFreteReq] = useState({
+        type: "frete",
+        fre_destino: "08770320",
+        items: [
+            {
+                ite_peso: "1",
+                ite_comprimento: "30",
+                ite_altura: "2",
+                ite_largura: "30"
+            },
+            {
+                ite_peso: "1",
+                ite_comprimento: "30",
+                ite_altura: "2",
+                ite_largura: "30"
+            }
+        ]
     });
+
+    useEffect(() => {
+        if(carrinhoItens.length === 0) {
+            history.push('/')
+        }
+    }, [carrinhoItens])
+
+    async function calcularFrete() {
+        let response = await api.post('/frete/calcular', freteReq);
+        setFreteData(response.data);
+        console.log(response.data)
+        setFreteValor(response.data[0].Valor);
+        let total_com_frete = parseFloat(response.data[0].Valor.replace(',','.')) + calcularTotal();
+        total_com_frete = total_com_frete.toFixed(2);
+        console.log(total_com_frete)
+        setTotalComFrete(total_com_frete)        
+    }
+
+
 
     function removeProduto(id:string) {
         let index = carrinhoItens.findIndex((item:livroType) => item.liv_id === id )
         carrinhoItens.splice(carrinhoItens[index], 1);
         setCarrinhoItens(carrinhoItens);
-        history.push("/selecaoDeEndereco")
+        setFreteValor(0.00);
+        setTotalComFrete(0.00);
+        if(carrinhoItens.length !== 0)
+            history.push("/selecaoDeEndereco")
+        else
+            history.push("/")
     }
 
     function calcularTotal() {
@@ -88,14 +123,14 @@ export function SelecaoDeEndereco() {
                                 <h5>R$ {calcularTotal()}</h5>
                             </div>
 
-                            <div className="valores">
+                            <div id="frete-valor" className="valores">
                                 <p>Frete</p>
-                                <h5>R$ 50,00 | Prazo</h5>
+                                <h5>R$ {(freteValor)}</h5>
                             </div>
 
-                            <div className="valores">
+                            <div id="total-com-frete" className="valores">
                                 <p>Total</p>
-                                <h5>R$ 550,00</h5>
+                                <h5>R$ {(totalComFrete)}</h5>
                             </div>
 
                             <div className="selecionar_endereco">
@@ -106,7 +141,7 @@ export function SelecaoDeEndereco() {
                                     <option>endereco 2</option>
                                 </select>
 
-                                <select name="endereco_entrega" id="endereco_entrega">
+                                <select onChange={() => calcularFrete()} name="endereco_entrega" id="endereco_entrega">
                                     <option value="" disabled selected>endereco de entrega</option>
                                     <option>endereco 1</option>
                                     <option>endereco 2</option>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { CarrinhoProduto } from "../components/CarrinhoProduto";
 import { Footer } from "../components/Footer";
@@ -52,11 +52,20 @@ export function FormaDePagamento() {
     ]
     const { carrinhoItens, setCarrinhoItens } = useContext(CartContext);
 
+    useEffect(() => {
+        if(carrinhoItens.length === 0) {
+            history.push('/')
+        }
+    }, [carrinhoItens])
+
     function removeProduto(id:string) {
         let index = carrinhoItens.findIndex((item:livroType) => item.liv_id === id )
         carrinhoItens.splice(carrinhoItens[index], 1);
         setCarrinhoItens(carrinhoItens);
-        history.push("/formaDePagamento")
+        if(carrinhoItens.length !== 0)
+            history.push("/selecaoDeEndereco")
+        else
+            history.push("/")
     }
 
     function calcularTotal() {
