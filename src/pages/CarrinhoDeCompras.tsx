@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { CarrinhoProduto } from "../components/CarrinhoProduto";
@@ -33,19 +33,25 @@ type livroType = {
     liv_mlucro?: string,
     liv_preco: string,
     liv_cbarras?: string,
-    liv_quantidade?: string,
+    liv_quantidade: string,
     liv_ativo?: true,
 }
 
 export function CarrinhoDeCompras() {
 
     const { authenticated } = useContext(Context);
-    const { carrinhoItens, setCarrinhoItens } = useContext(CartContext);
+    const { carrinhoItens, setCarrinhoItens, pedidos, setPedidos } = useContext(CartContext);
     const history = useHistory();
+    const [total, setTotal] = useState(0.00);
 
     useEffect(() => {
-        addProdutoCards();
-    }, [addProdutoCards])
+        if (carrinhoItens.length === 0) {
+            history.push('/')
+        } else {
+            calcularTotal()
+            addProdutoCards();
+        }
+    }, [addProdutoCards, carrinhoItens])
 
     function continuarCompra() {
         if(authenticated) {
@@ -60,10 +66,13 @@ export function CarrinhoDeCompras() {
     }
 
     function calcularTotal() {
-        if(carrinhoItens) {
-            return carrinhoItens.reduce((sum:number, item:livroType) =>  
-                sum += parseFloat(item.liv_preco), 0
+        if (carrinhoItens) {
+            console.log(carrinhoItens)
+            let totali = carrinhoItens.reduce((sum: number, item: livroType) =>
+                sum += parseFloat(item.liv_preco) * parseInt(item.liv_quantidade), 0
             )
+            setTotal(totali)
+            return totali;
         }
     }
 
@@ -82,6 +91,8 @@ export function CarrinhoDeCompras() {
                 removeProduto={removeProduto}
                 key={index}
                 data={item}
+                disabled={false}
+                calcularTotal={calcularTotal}
             />
         ))
     }
@@ -98,7 +109,7 @@ export function CarrinhoDeCompras() {
                         <div className="total_carrinho col-12 col-md-4">
                             <div className="valores">
                                 <p>Total</p>
-                                <h5>R$ {calcularTotal()}</h5>
+                                <h5>R$ {total}</h5>
                             </div>
                             <div className="buttons">
                                 <Link to="/" className="button">Voltar a Loja</Link>

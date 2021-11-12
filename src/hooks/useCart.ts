@@ -26,8 +26,17 @@ type livroType = {
   liv_ativo?: true,
 }
 
+type pedidosType = {
+  carrinhoItens:livroType[],
+  ped_end_ent_id: string,
+  ped_end_cob_id: string,
+  ped_valor: string,
+  ped_status: string
+}
+
 export default function useCart() {
   const [carrinhoItens, setCarrinhoItens] = useState<livroType[]>([]);
+  const [pedidos, setPedidos] = useState<pedidosType>();
   
-  return { carrinhoItens, setCarrinhoItens };
+  return { carrinhoItens, setCarrinhoItens, pedidos, setPedidos };
 }

@@ -26,7 +26,7 @@ export function HeaderMenu(props:headerMenuProps) {
             { authenticated && (
                 <>
                     <li><Link to="/detalhesDaConta">Olá {user}</Link></li>
-                    <li><Link to="/#">Ver pedidos</Link></li>
+                    <li><Link to="/verPedidos">Ver pedidos</Link></li>
                     <li><button type="button" onClick={handleLogout}>Log out</button></li>
                 </>
             )}

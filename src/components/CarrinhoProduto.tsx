@@ -33,18 +33,22 @@ type livroType = {
 
 type carrinhoDeComprasProps = {
     data: livroType,
-    removeProduto: Function
+    removeProduto: Function,
+    calcularTotal?: Function,
+    disabled:Boolean
 }
 
 export function CarrinhoProduto(props:carrinhoDeComprasProps) {
     const { carrinhoItens, setCarrinhoItens } = useContext(CartContext);
     const [ quantidade, setQuantidade ] = useState(props.data.liv_quantidade)
 
-    function addQuantidade(value:string) {
+    function modQuantidade(value:string) {
         let index = carrinhoItens.findIndex((item:livroType) => item.liv_id === props.data.liv_id )
         carrinhoItens[index].liv_quantidade = value;
         setCarrinhoItens(carrinhoItens)
         setQuantidade(carrinhoItens[index].liv_quantidade);
+        if(props.calcularTotal)
+            props.calcularTotal();
     }
 
     return (
@@ -54,13 +58,26 @@ export function CarrinhoProduto(props:carrinhoDeComprasProps) {
             <h5 className="produto_nome">{props.data.liv_nome}</h5>
             <div className="produto_quantidade">
                 <label htmlFor="">QTD: </label>
-                <input
-                    type="number"
-                    pattern="[0-9]*"
-                    value={quantidade}
-                    max={props.data.liv_estoque}
-                    onChange={(e) => addQuantidade(e.currentTarget.value)} 
-                />
+                {(props.disabled === true ? (
+                    <input
+                        type="number"
+                        pattern="[0-9]*"
+                        value={quantidade}
+                        max={props.data.liv_estoque}
+                        min="1"
+                        disabled
+                        onChange={(e) => modQuantidade(e.currentTarget.value)} 
+                    />
+                ):(
+                    <input
+                        type="number"
+                        pattern="[0-9]*"
+                        value={quantidade}
+                        max={props.data.liv_estoque}
+                        min="1"
+                        onChange={(e) => modQuantidade(e.currentTarget.value)} 
+                    />
+                ))}
             </div>
             <h5 className="produto_preco">{props.data.liv_preco}</h5>
         </div>

@@ -12,10 +12,10 @@ export function Modal(props:modalProps) {
     }
 
     return (
-        <div className="modal" onClick={closeModal}>
+        <div className="modal-custom" onClick={closeModal}>
             <div className="boxMessage">
-                <h1>{props.message}</h1>
-                <button onClick={() => props.setShowModal(false)} className="button" type="button" >OK</button>
+                <p>{props.message}</p>
+                <button onClick={() => props.setShowModal()} className="button" type="button" >OK</button>
             </div>
         </div>
     );

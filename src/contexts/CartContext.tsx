@@ -10,11 +10,11 @@ const CartContext = createContext({} as any);
 
 function CartProvider({children}:cartProviderProps) {
   const {
-    carrinhoItens, setCarrinhoItens
+    carrinhoItens, setCarrinhoItens, pedidos, setPedidos
   } = useCart();
 
   return (
-    <CartContext.Provider value={{ carrinhoItens, setCarrinhoItens }}>
+    <CartContext.Provider value={{ carrinhoItens, setCarrinhoItens, pedidos, setPedidos }}>
       {children}
     </CartContext.Provider>
   );

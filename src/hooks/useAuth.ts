@@ -35,7 +35,9 @@ export default function useAuth() {
       api.defaults.headers.Authorization = `Bearer ${userDB.data.token}`;
       setUser(userDB.data.result.cli_pnome);
       setAuthenticated(true);
+      return true;
     }
+    return false;
   }
 
   async function handleLogout() {

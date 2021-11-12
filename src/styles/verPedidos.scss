@@ -1,0 +1,102 @@
+@import 'variables';
+
+.verPedido {
+    height: 40px;
+    margin-bottom: 10px;
+    h3 {
+        width: 100%;
+        background: $blue2;
+        padding: 5px;
+        text-align: center;
+        color: white;
+        position: relative;
+
+        div {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 15px;
+            border-left: 3px solid white;
+            border-top: 3px solid white;
+            width: 12px;
+            height: 12px;
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            &:hover {
+                transform: rotate(225deg);
+            }
+        }
+
+    }
+    
+    table {
+        width: 100%;
+        opacity: 0;
+        tbody {
+            tr {
+                text-align: center;
+                border-bottom: 1px solid $blue3;
+                td {
+                    padding: 5px;
+                    button {
+                        all: unset;
+                        padding: 10px;
+                        border: 1px solid $yellow;
+                    }
+                }
+            }
+        }
+        
+    }
+
+    &.active {
+        height: 200px;
+
+        table {
+            opacity: 1;
+        }
+    
+        div {
+            transform: rotate(225deg);
+        }
+    }
+}
+
+.verCupons {
+    table {
+        width: 100%;
+        thead {
+            tr {
+                th {
+                    text-align: center;
+                    padding: 5px;
+                    background: $blue2;
+                    color: white;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    text-align: center;
+                    padding: 5px;
+                    border-bottom: 1px solid $gray;
+                }
+            }
+        }
+    }
+}
+
+.menu__pedidosECupons {
+    background: $blue2;
+    li {
+        cursor: pointer;
+        color: white;
+        text-align: center;
+        padding: 5px;
+
+        &:hover {
+            background: darken($blue2, 5);
+        }
+    }
+}
